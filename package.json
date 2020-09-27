@@ -1,0 +1,22 @@
+{
+  "name": "fitnesstracker",
+  "version": "1.0.0",
+  "description": "App that tracks your fitness",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yitzhakalvarez/FitnessTracker.git"
+  },
+  "keywords": [
+    "fitness"
+  ],
+  "author": "Yitzhak Alvarez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yitzhakalvarez/FitnessTracker/issues"
+  },
+  "homepage": "https://github.com/yitzhakalvarez/FitnessTracker#readme"
+}
