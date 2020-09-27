@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/yitzhakalvarez/FitnessTracker/issues"
   },
-  "homepage": "https://github.com/yitzhakalvarez/FitnessTracker#readme"
+  "homepage": "https://github.com/yitzhakalvarez/FitnessTracker#readme",
+  "dependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
