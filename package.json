@@ -4,22 +4,23 @@
   "description": "App that tracks your fitness",
   "main": "server/index.js",
   "scripts": {
+    "test": "npm run serve",
     "start": "nodemon --watch server server/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yitzhakalvarez/FitnessTracker.git"
   },
-  "keywords": [
-    "fitness"
-  ],
+  "keywords": [],
   "author": " ",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yitzhakalvarez/FitnessTracker/issues"
   },
-  "homepage": "https://github.com/yitzhakalvarez/FitnessTracker#readme",
   "dependencies": {
+    "express": "4.17.1"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.4"
   }
 }
