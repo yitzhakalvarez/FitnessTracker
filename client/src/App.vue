@@ -1,10 +1,10 @@
 <template>
-  <section class="section">
-    <div class="container">
+    <div class="">
       <Nav />
+      <div class="container">
       <router-view/>
+      </div>
     </div>
-  </section>
 </template>
 
 <script>
