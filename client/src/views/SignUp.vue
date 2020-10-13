@@ -1,15 +1,88 @@
 <template>
-  <div class="register">
-    <register />
+<form>
+  <div id="app">
+  <div class="section">
+    <div class="container">
+      <div class="media is-pulled-right">
+        <div class="media-content">
+          <span class="has-text-center">Connect With:</span><br />
+          <div class="field is-grouped">
+            <div class="control">
+              <div class="g-signin2"></div>
+            </div>
+            <div class="control">
+              <button class="button githubSignin"><span class="github-icon icon"><i class="fab">github</i></span>
+                <p>
+                  Sign In
+                </p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="title">
+        Sign Up
+      </div>
+      <div class="subtitle">
+        With Your Email
+      </div>
+      <form id="register-form">
+        <div class="field">
+          <label class="label" for="username">Username</label>
+          <div class="control has-icons-left">
+            <input class="input" name="username" placeholder="Username" type="text" /><span class="icon is-left"><i class="fa">user</i></span>
+          </div>
+          <label class="label" for="email">Email</label>
+          <div class="control has-icons-left">
+            <input class="input" name="email" placeholder="Email" type="email" /><span class="icon is-left"><i class="fa">envelope-square</i></span>
+          </div>
+          <div class="columns row-one">
+            <div class="column">
+              <label class="label" for="firstName">First Name</label>
+              <div class="control">
+                <input class="input" name="firstName" placeholder="First Name" type="text" />
+              </div>
+            </div>
+            <div class="column">
+              <label class="label" for="lastName">Last Name</label>
+              <div class="control">
+                <input class="input" name="lastName" placeholder="Last Name" type="text" />
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <label class="label" for="password">Password</label>
+              <div class="control has-icons-left">
+                <input class="input" name="password" placeholder="Password" type="password" /><span class="icon is-left"><i class="fa">key</i></span>
+              </div>
+            </div>
+            <div class="column">
+              <label class="label" for="retypePassword">Re-Type Password</label>
+              <div class="control has-icons-left">
+                <input class="input" name="retypePassword" placeholder="Confirm Password" type="password" /><span class="icon is-left"><i class="fa">lock</i></span>
+              </div>
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-primary is-medium" type="submit">Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
+</div>
+</form>
 </template>
 
 <script>
-import register from '../components/auth/register.vue'
 export default {
-  name: 'App',
-  components: {
-    register
-  }
+
 }
 </script>
+
+<style>
+
+</style>
