@@ -29,16 +29,14 @@
                Remember me
               </label>
             </div>
-            <div class="field">
-              <button class="button is-success">
-                Login
-              </button>
+            <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-medium">Login</button>
             </div>
-             <div class="field">
-              <button class="button is-success">
-                Login
-              </button>
+            <div class="control">
+          <router-link to="/SignUp" class="button is-primary is-medium">Register?</router-link>
             </div>
+          </div>
           </form>
         </div>
       </div>
