@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar container is-fixed-top is-link" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
+    <a class="navbar-item" href="/">
       <img src="../assets/logo.png" height="28">
     </a>
 
@@ -25,9 +25,6 @@
         <div class="navbar-dropdown">
           <a class="navbar-item">
             About
-          </a>
-          <a class="navbar-item">
-            Jobs
           </a>
           <a class="navbar-item">
             Contact
