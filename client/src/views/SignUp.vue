@@ -60,9 +60,6 @@
           </div>
           <div class="field is-grouped">
             <div class="control">
-              <button class="button is-medium">Login</button>
-            </div>
-            <div class="control">
               <button class="button is-primary is-medium" type="submit">Register</button>
             </div>
           </div>
@@ -74,7 +71,6 @@
 </form>
 </template>
 
-<!-- Google Sign In -->
 <script>
 export default {
 
