@@ -76,10 +76,49 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      register: {
+        firstName:"",
+        lastName:"",
+        email:"",
+        username:"",
+        password:"",
+        log: {
+          exercises: [{
+            type: "",
+            reps:"",
+            completed:""
+          }]
+        }
+      }
+    };
+  },
+  methods: {
+    async registerUser() {
+        try{
+            let res = await this.$http.post("/register", this.register);
+            let status = res.status
+            if(status == 200){
+                //localStorage.setItem("jwt", token);
+                this.$swal.fire("Success", "Registration Was successful", "success");
+                this.$router.push("/login");
+            }
+            else{
+                this.$swal.fire("Error", "Something went wrong, try again", "error");
+            }
+        }
+        catch(err){
+            const error = err.response
+            if(error.status == 409){
+                //TODO: Find a secure alert message for registering an email already in the database
+                this.$swal.fire("Error", "Email already exists,", "error");
+            }
+            else{
+                this.$swal.fire("Error", "Something Went wrong when registeering, please try again", "error");
+            }
+}
+    }
+  }
 }
 </script>
-
-<style>
-
-</style>
