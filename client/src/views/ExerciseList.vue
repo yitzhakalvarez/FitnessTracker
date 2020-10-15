@@ -36,9 +36,9 @@
 </template>
 <script>
 // import EventService
-import EventService from '@/services/exercises.js';
+import exercises from '@/services/exercises.js';
 export default {
-  name: 'Exercises',
+  name: 'ExerciseList',
   data() {
     // initialize the event object
     return {
