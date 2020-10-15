@@ -9,7 +9,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/event/:id',
+    path: '/list:id',
     name: 'List',
     component: () => import('../views/List.vue'),
     beforeEnter: authGuard
