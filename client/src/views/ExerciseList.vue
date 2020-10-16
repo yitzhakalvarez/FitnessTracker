@@ -35,31 +35,47 @@
   </div>
 </template>
 <script>
-// import EventService
-import exercises from '@/services/exercises.js';
 export default {
-  name: 'ExerciseList',
+  name: "ExerciseList",
   data() {
-    // initialize the event object
     return {
+      events: [
+        {
+          id: 1,
+          name: "John Smith",
+          category: "Gym",
+          description:
+            "Some big ol' dude.",
+          featuredImage: "https://clipartstation.com/wp-content/uploads/2018/10/man-exercising-clipart.jpg",
+          images: [
+            "https://clipartstation.com/wp-content/uploads/2018/10/man-exercising-clipart.jpg",
+            "https://clipartstation.com/wp-content/uploads/2018/10/man-exercising-clipart.jpg",
+            "https://clipartstation.com/wp-content/uploads/2018/10/man-exercising-clipart.jpg"
+          ],
+          location: "1234 Big Ave",
+          date: "12-25-1998",
+          time: "11:30"
+        },
+        {
+          id: 2,
+          name: "Jane Smith",
+          category: "Gym",
+          description:
+            "Some ol' lady",
+          featuredImage: "https://i.pinimg.com/originals/2c/dd/7a/2cdd7a89ecad9bfb21be3df00a8da4c6.jpg",
+          images: ["https://i.pinimg.com/originals/2c/dd/7a/2cdd7a89ecad9bfb21be3df00a8da4c6.jpg"],
+          location: "1234 Dawg Ave",
+          date: "11-21-1997",
+          time: "12:00"
+        }
+      ],
       event: {}
-    }
+    };
   },
   created() {
-    this.getEventData();
-  },
-  methods: {
-    async getEventData() {
-      // Get the access token from the auth wrapper
-      const accessToken = await this.$auth.getTokenSilently()
-      // Use the eventService to call the getEventSingle method
-      EventService.getEventSingle(this.$route.params.id, accessToken)
-      .then(
-        (event => {
-          this.$set(this, "event", event);
-        }).bind(this)
-      );
-    }
+    const ID = Number(this.$route.params.id);
+    let event = this.events.find(event => event.id === ID);
+    this.event = event;
   }
-}
+};
 </script>

@@ -9,8 +9,8 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/ExerciseList',
-    name: 'ExerciseList',
+    path: '/exerciselist/:id',
+    name: 'exerciseList',
     component: () => import('../views/ExerciseList.vue'),
     beforeEnter: authGuard
   },
