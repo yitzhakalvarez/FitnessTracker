@@ -9,28 +9,19 @@
         <h2 class="subtitle">
           Make sure you register to keep up with your calories count below.
         </h2>
-        <div class="button-block">
-          <button v-if="!$auth.isAuthenticated" @click="login" class="button is-xl is-dark">Sign Up - you won't regret it!</button>
-          <h3 v-if="$auth.isAuthenticated" class="is-size-3 has-background-dark welcome">Welcome, {{ $auth.user.name }}!</h3>
-        </div>
+        
       </div>
     </div>
-  </section>
-  <Nav />
+        </section>
+        <Nav />
 </div>
 </template>
+
 <script>
-import ExerciseList from '../views/ExerciseList';
+
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
-    ExerciseList
-  },
-  methods: {
-    // Log the user in
-    login() {
-      this.$auth.loginWithRedirect();
-    }
   }
 }
 </script>

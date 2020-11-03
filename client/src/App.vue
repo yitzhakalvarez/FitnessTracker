@@ -14,8 +14,4 @@ export default {
     Nav
   }
 }
-</script>
-
-<style lang="scss">
-
-</style>
+</script> 

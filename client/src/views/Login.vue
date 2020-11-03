@@ -31,11 +31,7 @@
             </div>
             <div class="field is-grouped">
             <div class="control">
-            <div v-if="!$auth.loading">
-
-            <a v-if="!$auth.isAuthenticated" @click="login" class="button is-light is-medium">Login</a>
-            <a v-if="$auth.isAuthenticated" @click="logout" class="button is-dark"><strong>Log out</strong></a>
-            </div>
+          <router-link to="/Login" class="button is-primary is-medium">Login</router-link>
             </div>
             <div class="control">
           <router-link to="/SignUp" class="button is-primary is-medium">Register?</router-link>
@@ -52,19 +48,33 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  name: 'Nav',
-  methods: {
-  // Log the user in
-  login() {
-    this.$auth.loginWithRedirect();
+  name: "Login",
+  components: {},
+  data() {
+    return {
+      form: {
+        username: "",
+        password: "",
+      },
+      showError: false
+    };
   },
-  // Log the user out
-  logout() {
-    this.$auth.logout({
-      returnTo: window.location.origin
-    });
-  }
-  }
-}
+  methods: {
+    ...mapActions(["LogIn"]),
+    async submit() {
+      const User = new FormData();
+      User.append("username", this.form.username);
+      User.append("password", this.form.password);
+      try {
+          await this.LogIn(User);
+          this.$router.push("/log");
+          this.showError = false
+      } catch (error) {
+        this.showError = true
+      }
+    },
+  },
+};
 </script>

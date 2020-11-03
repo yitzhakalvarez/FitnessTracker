@@ -4,62 +4,49 @@
     <a class="navbar-item" href="/">
       <strong class="is-size-4">Fitness Tracker</strong>
     </a>
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+     <a role="button" class="navbar-burger burger" :class="{ 'is-active': isActive }" @click="isActive = !isActive" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
-  <div id="navbar" class="navbar-menu">
-    <div class="navbar-start">
-      <router-link to="/" class="navbar-item">Home</router-link>
-      <router-link to="/about" class="navbar-item">About</router-link>
-      <router-link to="/exercise" class="navbar-item">Exercises</router-link>
 
+  <div id="navbarBasicExample" class="navbar-menu "  :class="{ 'is-active': isActive }">
+    <div class="navbar-start">
+      <router-link to="/"  class="navbar-item">Home</router-link>
+      <router-link to="/about"  class="navbar-item">About</router-link>
+      <router-link to="/log" class="navbar-item">Log</router-link>
     </div>
-    <div class="navbar-end">
+     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <!-- Check that the SDK client is not currently loading before accessing is methods -->
-          <div v-if="!$auth.loading">
-            <!-- show login when not authenticated -->
-            <a v-if="!$auth.isAuthenticated" @click="login" class="button is-dark"><strong>Sign in</strong></a>
-            <!-- show logout when authenticated -->
-            <a v-if="$auth.isAuthenticated" @click="logout" class="button is-dark"><strong>Log out</strong></a>
+          <span v-if="isLoggedIn">
+      <a @click="logout">Logout</a>
+    </span>
+    <span v-else>
+          <router-link to="/login" class="button is-light">Login</router-link>
+          <router-link to="/SignUp" class="button is-light">Sign Up</router-link>
+    </span>
           </div>
-        </div>
-      </div>
     </div>
   </div>
+    </div>
 </nav>
 </template>
+
 <script>
 export default {
-  name: 'Nav',
-  methods: {
-  // Log the user in
-  login() {
-    this.$auth.loginWithRedirect();
+  name: "Nav",
+  computed: {
+    isLoggedIn: function() {
+      return this.$store.getters.isAuthenticated;
+    },
   },
-  // Log the user out
-  logout() {
-    this.$auth.logout({
-      returnTo: window.location.origin
-    });
-  }
-  }
-}
+  methods: {
+    async logout() {
+      await this.$store.dispatch("LogOut");
+      this.$router.push("/login");
+    },
+  },
+};
 </script>
-<style lang="scss" scoped>
-  nav {
-    margin-top: 25px;
-    margin-bottom: 30px;
-    a {
-      font-weight: bold;
-      color: #2c3e50;
-      &.router-link-exact-active {
-        color: #d88d00;
-      }
-    }  
-  } 
-</style>

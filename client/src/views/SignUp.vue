@@ -70,55 +70,56 @@
   </form>
 </div>
 </div>
+    <p v-if="showError" id="error">Username already exists</p>
+
 </div>
 </form>
 </template>
 
 <script>
 export default {
+}
+</script>
+
+<style>
+.column {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+.row-one {
+	padding-top: 13px;
+}
+form .field {
+	margin: auto;
+	max-width: 740px;
+}
+</style>
+<script>
+import { mapActions } from "vuex";
+export default {
+  name: "Register",
+  components: {},
   data() {
     return {
-      register: {
-        firstName:"",
-        lastName:"",
-        email:"",
-        username:"",
-        password:"",
-        log: {
-          exercises: [{
-            type: "",
-            reps:"",
-            completed:""
-          }]
-        }
-      }
+      form: {
+        username: "",
+        full_name: "",
+        password: "",
+      },
+      showError: false
     };
   },
   methods: {
-    async registerUser() {
-        try{
-            let res = await this.$http.post("/register", this.register);
-            let status = res.status
-            if(status == 200){
-                //localStorage.setItem("jwt", token);
-                this.$swal.fire("Success", "Registration Was successful", "success");
-                this.$router.push("/login");
-            }
-            else{
-                this.$swal.fire("Error", "Something went wrong, try again", "error");
-            }
-        }
-        catch(err){
-            const error = err.response
-            if(error.status == 409){
-                //TODO: Find a secure alert message for registering an email already in the database
-                this.$swal.fire("Error", "Email already exists,", "error");
-            }
-            else{
-                this.$swal.fire("Error", "Something Went wrong when registeering, please try again", "error");
-            }
-}
-    }
-  }
-}
+    ...mapActions(["Register"]),
+    async submit() {
+      try {
+        await this.Register(this.form);
+        this.$router.push("/posts");
+        this.showError = false
+      } catch (error) {
+        this.showError = true
+      }
+    },
+  },
+};
 </script>

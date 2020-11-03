@@ -1,33 +1,31 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store';
+import axios from 'axios';
 
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "https://app-fitnesstrack.herokuapp.com/";
 import 'buefy/dist/buefy.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 
-// Import the Auth0 configuration
-import { domain, clientId, audience } from "../auth_config.json";
 
-// Import the plugin here
-import { Auth0Plugin } from "./auth";
 
-// Install the authentication plugin here
-Vue.use(Auth0Plugin, {
-  domain,
-  clientId,
-  audience,
-  onRedirectCallback: appState => {
-    router.push(
-      appState && appState.targetUrl
-        ? appState.targetUrl
-        : window.location.pathname
-    );
+axios.interceptors.response.use(undefined, function(error) {
+  if (error) {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      store.dispatch("LogOut");
+      return router.push("/login");
+    }
   }
 });
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
+  store,
   router,
-  render: h => h(App)
-}).$mount('#app')
+  render: (h) => h(App),
+}).$mount("#app");
