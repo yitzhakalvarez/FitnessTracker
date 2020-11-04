@@ -3,12 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store';
 import axios from 'axios';
-
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "https://app-fitnesstrack.herokuapp.com/";
 import 'buefy/dist/buefy.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "https://app-fitnesstrack.herokuapp.com/";
 
 
 axios.interceptors.response.use(undefined, function(error) {

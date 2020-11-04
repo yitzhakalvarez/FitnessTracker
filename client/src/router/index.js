@@ -3,15 +3,15 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import SignUp from '../views/SignUp.vue';
-import Log from '../views/Log.vue';
+import Posts from '../views/Posts.vue';
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/log",
-    name: "Log",
-    component: Log,
+    path: "/posts",
+    name: "Posts",
+    component: Posts,
     meta: { requiresAuth: true },
   },
   {
@@ -47,22 +47,22 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (store.getters.isAuthenticated) {
+router.beforeEach(function (to, _from, next) {
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+      if (store.getters.isAuthenticated) {
+        next();
+        return;
+      }
+      next("/login");
+    } else {
       next();
-      return;
     }
-    next("/login");
-  } else {
-    next();
-  }
-});
+  });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   if (to.matched.some((record) => record.meta.guest)) {
     if (store.getters.isAuthenticated) {
-      next("/log");
+      next("/posts");
       return;
     }
     next();

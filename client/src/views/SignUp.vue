@@ -24,23 +24,23 @@
     <div class="field">
       <label class="label" for="username">Username</label>
       <div class="control has-icons-left">
-        <input class="input" type="text" placeholder="Username" name="username"/><span class="icon is-left"><i class="fa">user</i></span>
+        <input class="input" type="text" placeholder="Username" name="username" v-model="form.username"/><span class="icon is-left"><i class="fa">user</i></span>
       </div>
       <label class="label" for="email">Email</label>
       <div class="control has-icons-left">
-        <input class="input" type="email" placeholder="Email" name="email"/><span class="icon is-left"><i class="fa">envelope-square</i></span>
+        <input class="input" type="email" placeholder="Email" name="email" v-model="form.email"/><span class="icon is-left"><i class="fa">envelope-square</i></span>
       </div>
       <div class="columns row-one">
         <div class="column">
           <label class="label" for="firstName">First Name</label>
           <div class="control">
-            <input class="input" type="text" placeholder="First Name" name="firstName"/>
+            <input class="input" type="text" placeholder="First Name" name="firstName" v-model="form.first_name"/>
           </div>
         </div>
         <div class="column">
           <label class="label" for="lastName">Last Name</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Last Name" name="lastName"/>
+            <input class="input" type="text" placeholder="Last Name" name="lastName" v-model="form.last_name"/>
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@
         <div class="column">
           <label class="label" for="password">Password</label>
           <div class="control has-icons-left">
-            <input class="input" type="password" placeholder="Password" name="password"/><span class="icon is-left"><i class="fa">key</i></span>
+            <input class="input" type="password" placeholder="Password" name="password" v-model="form.password"/><span class="icon is-left"><i class="fa">key</i></span>
           </div>
         </div>
         <div class="column">
@@ -77,8 +77,35 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-}
+  name: "SignUp",
+  components: {},
+  data() {
+    return {
+      form: {
+        username: "",
+        email: "",
+        first_name: "",
+        last_name: "",
+        password: "",
+      },
+      showError: false
+    };
+  },
+  methods: {
+    ...mapActions(["SignUp"]),
+    async submit() {
+      try {
+        await this.Register(this.form);
+        this.$router.push("/posts");
+        this.showError = false
+      } catch (error) {
+        this.showError = true
+      }
+    },
+  },
+};
 </script>
 
 <style>

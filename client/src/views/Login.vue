@@ -8,7 +8,7 @@
             <div class="field">
               <label for="" class="label">Username or email address</label>
               <div class="control has-icons-left">
-                <input type="email" placeholder="me@gmail.com | username" class="input" required>
+                <input type="email" placeholder="me@gmail.com | username" class="input" v-model="form.username" required>
                 <span class="icon is-small is-left">
                   <i class="fa fa-envelope"></i>
                 </span>
@@ -17,7 +17,7 @@
             <div class="field">
               <label for="" class="label">Password</label>
               <div class="control has-icons-left">
-                <input type="password" placeholder="*******" class="input" required>
+                <input type="password" placeholder="*******" class="input" v-model="form.password" required>
                 <span class="icon is-small is-left">
                   <i class="fa fa-lock"></i>
                 </span>
@@ -62,14 +62,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["LogIn"]),
+    ...mapActions(["Login"]),
     async submit() {
       const User = new FormData();
       User.append("username", this.form.username);
       User.append("password", this.form.password);
       try {
-          await this.LogIn(User);
-          this.$router.push("/log");
+          await this.Login(User);
+          this.$router.push("/posts");
           this.showError = false
       } catch (error) {
         this.showError = true
