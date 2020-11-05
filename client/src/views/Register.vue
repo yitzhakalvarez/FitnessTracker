@@ -51,16 +51,10 @@
             <input class="input" type="password" placeholder="Password" name="password" v-model="form.password"/><span class="icon is-left"><i class="fa">key</i></span>
           </div>
         </div>
-        <div class="column">
-          <label class="label" for="retypePassword">Re-Type Password</label>
-          <div class="control has-icons-left">
-            <input class="input" type="password" placeholder="Confirm Password" name="retypePassword"/><span class="icon is-left"><i class="fa">lock</i></span>
-          </div>
-        </div>
       </div>
       <div class="field is-grouped">
         <div class="control">
-          <router-link to="/login" class="button is-light is-medium">Logged in?</router-link>
+          <router-link to="/login" class="button is-light is-medium">Cancel</router-link>
         </div>
         <div class="control">
           <button class="button is-primary is-medium" type="submit">Register</button>

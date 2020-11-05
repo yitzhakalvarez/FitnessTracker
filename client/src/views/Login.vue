@@ -6,9 +6,9 @@
         <div class="column is-5-tablet is-4-desktop is-3-widescreen">
           <form action="" class="box" @submit.prevent="login">
             <div class="field">
-              <label for="" class="label">Username or email address</label>
+              <label for="" class="label">Username</label>
               <div class="control has-icons-left">
-                <input type="email" placeholder="me@gmail.com | username" class="input" v-model="form.username" required>
+                <input type="username" placeholder="username" class="input" v-model="form.username" required>
                 <span class="icon is-small is-left">
                   <i class="fa fa-envelope"></i>
                 </span>
@@ -34,7 +34,7 @@
           <router-link to="/Login" class="button is-primary is-medium">Login</router-link>
             </div>
             <div class="control">
-          <router-link to="/SignUp" class="button is-primary is-medium">Register?</router-link>
+          <router-link to="/Register" class="button is-primary is-medium">Register?</router-link>
             </div>
                       
           </div>

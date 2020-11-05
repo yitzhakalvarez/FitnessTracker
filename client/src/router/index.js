@@ -2,23 +2,16 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
-import SignUp from '../views/SignUp.vue';
-import Posts from '../views/Posts.vue';
+import Register from '../views/Register.vue';
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/posts",
-    name: "Posts",
-    component: Posts,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/signup',
-    name: 'SignUp',
-    component: SignUp,
-    meta: { guest: true },
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: { requiresAdmin: false, requiresLogin: false },
   },
   { 
     path: '/', 
@@ -29,8 +22,8 @@ const routes = [
     path: '/login', 
     name: 'Login', 
     component: Login,
-    meta: { guest: true },
-  },
+    meta: { requiresAdmin: false, requiresLogin: false },
+    },
   {
     path: '/about',
     name: 'About',
@@ -47,28 +40,6 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach(function (to, _from, next) {
-    if (to.matched.some((record) => record.meta.requiresAuth)) {
-      if (store.getters.isAuthenticated) {
-        next();
-        return;
-      }
-      next("/login");
-    } else {
-      next();
-    }
-  });
 
-router.beforeEach((to, _from, next) => {
-  if (to.matched.some((record) => record.meta.guest)) {
-    if (store.getters.isAuthenticated) {
-      next("/posts");
-      return;
-    }
-    next();
-  } else {
-    next();
-  }
-});
 
 export default router;
