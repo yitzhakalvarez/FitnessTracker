@@ -17,7 +17,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/users', users);
 
 app.use( (err, req, res, next) =>{
     console.log(err);
