@@ -1,7 +1,7 @@
 const express = require('express')
 require('dotenv').config();
 
-const users = require('./controllers/users');
+const users = require('./models/Users');
 
 const app = express()
 const port = process.env.PORT || 3000;
@@ -17,10 +17,6 @@ app.use(function(req, res, next) {
   }
   next();
 });
-
-app.get('/', (req, res, next) => {
-  res.send('Hello Hudson Valley! You requested ' + req.url)
-})
 
 app.use('/users', users);
 
