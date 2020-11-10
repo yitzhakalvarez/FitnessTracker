@@ -7,6 +7,10 @@ import '@fortawesome/fontawesome-free/css/all.css'
 
 Vue.prototype.$axios = axios;
 
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "https://fitness-trak.herokuapp.com/";
+
+
 
 Vue.config.productionTip = false;
 
