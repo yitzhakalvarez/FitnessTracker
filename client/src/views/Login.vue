@@ -8,7 +8,7 @@
             <div class="field">
               <label for="" class="label">Username</label>
               <div class="control has-icons-left">
-                <input type="username" placeholder="username" class="input" v-model="form.username" required>
+                <input type="username" placeholder="username" class="input" v-model="username" required>
                 <span class="icon is-small is-left">
                   <i class="fa fa-envelope"></i>
                 </span>
@@ -17,7 +17,7 @@
             <div class="field">
               <label for="" class="label">Password</label>
               <div class="control has-icons-left">
-                <input type="password" placeholder="*******" class="input" v-model="form.password" required>
+                <input type="password" placeholder="*******" class="input" v-model="password" required>
                 <span class="icon is-small is-left">
                   <i class="fa fa-lock"></i>
                 </span>
@@ -48,33 +48,41 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import User from "../models/Users";
+import { getFood } from "../models/Food";
+import { getExercise } from "../models/Exercise";
+
 export default {
-  name: "Login",
-  components: {},
-  data() {
+  data(){
     return {
-      form: {
-        username: "",
-        password: "",
-      },
-      showError: false
-    };
+      email: '',
+      password: '',
+      error: '',
+      User
+    }
   },
-  methods: {
-    ...mapActions(["Login"]),
-    async submit() {
-      const User = new FormData();
-      User.append("username", this.form.username);
-      User.append("password", this.form.password);
+   methods: {
+    async login() {
       try {
-          await this.Login(User);
-          this.$router.push("/posts");
-          this.showError = false
-      } catch (error) {
-        this.showError = true
+        await User.Login(this.email, this.password);
+        await getFood();
+        await getExercise();//await getExercise(this.email);
+        await getFriends();
+        await getSentRequests();
+        await getPendingRequests();
+        await getPosts();
+        await getFoodPosts();
+        
+        if(User.CurrentUser.IsAdmin == true) {
+          this.$router.push('/admin');
+         } 
+         else { 
+          this.$router.push('/profile');
+         }
+      } catch(error) {
+        this.error = error;
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

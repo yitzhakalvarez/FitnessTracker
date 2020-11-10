@@ -24,23 +24,23 @@
     <div class="field">
       <label class="label" for="username">Username</label>
       <div class="control has-icons-left">
-        <input class="input" type="text" placeholder="Username" name="username" v-model="form.username"/><span class="icon is-left"><i class="fa">user</i></span>
+        <input class="input" type="text" placeholder="Username" name="username" v-model="username"/><span class="icon is-left"><i class="fa">user</i></span>
       </div>
       <label class="label" for="email">Email</label>
       <div class="control has-icons-left">
-        <input class="input" type="email" placeholder="Email" name="email" v-model="form.email"/><span class="icon is-left"><i class="fa">envelope-square</i></span>
+        <input class="input" type="email" placeholder="Email" name="email" v-model="email"/><span class="icon is-left"><i class="fa">envelope-square</i></span>
       </div>
       <div class="columns row-one">
         <div class="column">
           <label class="label" for="firstName">First Name</label>
           <div class="control">
-            <input class="input" type="text" placeholder="First Name" name="firstName" v-model="form.first_name"/>
+            <input class="input" type="text" placeholder="First Name" name="firstName" v-model="first_name"/>
           </div>
         </div>
         <div class="column">
           <label class="label" for="lastName">Last Name</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Last Name" name="lastName" v-model="form.last_name"/>
+            <input class="input" type="text" placeholder="Last Name" name="lastName" v-model="last_name"/>
           </div>
         </div>
       </div>
@@ -48,8 +48,14 @@
         <div class="column">
           <label class="label" for="password">Password</label>
           <div class="control has-icons-left">
-            <input class="input" type="password" placeholder="Password" name="password" v-model="form.password"/><span class="icon is-left"><i class="fa">key</i></span>
+            <input class="input" type="password" placeholder="Password" name="password" v-model="password"/><span class="icon is-left"><i class="fa">key</i></span>
           </div>
+        </div>
+        <div class="column">
+              <label class="label" for="retypePassword">Re-Type Password</label>
+              <div class="control has-icons-left">
+              <input class="input" type="password" placeholder="Confirm Password" name="retypePassword" v-model="cpassword"/><span class="icon is-left"><i class="fa">lock</i></span>
+      </div>
         </div>
       </div>
       <div class="field is-grouped">
@@ -64,83 +70,39 @@
   </form>
 </div>
 </div>
-    <p v-if="showError" id="error">Username already exists</p>
-
 </div>
 </form>
 </template>
 
-<script>
-import { mapActions } from "vuex";
-export default {
-  name: "SignUp",
-  components: {},
-  data() {
-    return {
-      form: {
-        username: "",
-        email: "",
-        first_name: "",
-        last_name: "",
-        password: "",
-      },
-      showError: false
-    };
-  },
-  methods: {
-    ...mapActions(["SignUp"]),
-    async submit() {
-      try {
-        await this.Register(this.form);
-        this.$router.push("/posts");
-        this.showError = false
-      } catch (error) {
-        this.showError = true
-      }
-    },
-  },
-};
-</script>
 
-<style>
-.column {
-	padding-top: 0 !important;
-	padding-bottom: 0 !important;
-}
-.row-one {
-	padding-top: 13px;
-}
-form .field {
-	margin: auto;
-	max-width: 740px;
-}
-</style>
 <script>
-import { mapActions } from "vuex";
+import User from "../models/Users";
 export default {
-  name: "Register",
-  components: {},
-  data() {
+  data(){
     return {
-      form: {
-        username: "",
-        full_name: "",
-        password: "",
-      },
-      showError: false
-    };
+      User,
+      username: '',
+      email: '',
+      first_name: '',
+      last_name:'',
+      password: '',
+      cpassword: '',
+      picture: 'https://www.seniorcatwellness.com/wp-content/uploads/2019/04/are-bananas-good-for-cats.jpg',
+      Status: '',
+      IsAdmin: false,
+      error: '',
+      user: []
+    }
   },
-  methods: {
-    ...mapActions(["Register"]),
-    async submit() {
+  methods: { 
+    async register() {
       try {
-        await this.Register(this.form);
-        this.$router.push("/posts");
-        this.showError = false
-      } catch (error) {
-        this.showError = true
+        await User.Register(this.email, this.first_name, this.last_name, this.password, this.cpassword);
+        this.$router.push('/profile');
+      } catch(error) {
+        this.error = error;
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

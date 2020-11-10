@@ -2,7 +2,7 @@
 <nav class="navbar container" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-            <img src="../assets/arnold.jpg" />
+            <img src="../assets/weight.png" />
       <strong class="is-size-4">Fitness Tracker</strong>
     </a>
      <a role="button" class="navbar-burger burger" :class="{ 'is-active': isActive }" @click="isActive = !isActive" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -12,27 +12,80 @@
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu "  :class="{ 'is-active': isActive }">
+  <div :class="{ 'is-active':isOpen }" class="navbar-menu">
     <div class="navbar-start">
-      <router-link to="/"  class="navbar-item">Home</router-link>
-      <router-link to="/about"  class="navbar-item">About</router-link>
-    </div>
-     <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <router-link to="/login" class="button is-light">Login</router-link>
-          <router-link to="/register" class="button is-light">Sign Up</router-link>
+      <router-link to="/about" class="navbar-item" active-class="is-current">About</router-link> 
+        <div class="navbar-item has-dropdown is-hoverable" v-if="CurrentUser">
+          <a class="navbar-item">Food</a>
+          <div class="navbar-dropdown">
+            <router-link class="navbar-item" to="/foodhistory">Food History</router-link>
+            <router-link class="navbar-item" to="/food">Log Food</router-link>
+          </div>  
+        </div>
+        <div v-else class="navbar-item">
+          <router-link class="navbar-item" to="/login">Food</router-link>
+        </div> 
+        <div class="navbar-item has-dropdown is-hoverable" v-if="CurrentUser">
+          <a class="navbar-item">Exercise</a>
+          <div class="navbar-dropdown">
+            <router-link class="navbar-item" to="/exhistory">Exercise History</router-link>
+            <router-link class="navbar-item" to="/exercise">Log Exercise</router-link>
+          </div>  
+        </div>
+        <div v-else class="navbar-item">
+          <router-link class="navbar-item" to="/login">Exercise</router-link>
+        </div>  
+      <div class="navbar-item has-dropdown is-hoverable" v-if="CurrentUser">
+        <a class="navbar-item">Account</a>
+        <div class="navbar-dropdown">
+          <div v-if="CurrentUser.IsAdmin==true">
+            <router-link class="navbar-item" to="/admin">Admin</router-link>
           </div>
+          <router-link class="navbar-item" to="/profile">Dashboard</router-link>
+          <router-link class="navbar-item" to="/friends">Friends</router-link>
+          <router-link class="navbar-item" to="/search">Search Users</router-link>
+          <router-link class="navbar-item" to="/updates">Shared Progress</router-link>
+          <router-link class="navbar-item" to="/pendingrequests">Pending Requests</router-link>
+          <router-link class="navbar-item" to="/settings">Settings</router-link>
+          <a class="navbar-item" href="#Logout" @click="logout">Logout</a>
+        </div>  
+      </div>  
     </div>
+      <div class="navbar-end">
+        <div v-if="!CurrentUser">  
+          <div class="buttons">
+            <router-link to="/register" class="button is-light">Register</router-link>
+            <router-link to="/login" class="button is-light">Log in</router-link>
+          </div>
+        </div> 
+        <div v-else>
+          <span class="navbar-item">Hi, {{CurrentUser.Name}}!</span>  
+        </div> 
   </div>
-    </div>
+  </div>
 </nav>
 </template>
 
 <script>
+import { Logout } from "../models/Users";
+import User  from "../models/Users";
 export default {
-  name: "Nav",
-  computed: {
-    },
-};
+  data:()=>({
+    userSearched: '',
+    isOpen: false
+    }),
+  props: {
+    CurrentUser: Object
+  },
+  methods: {
+    async logout() {
+      try {
+        await User.Logout();
+        this.$router.push('/login');
+      } catch (error) {
+        console.log(error);
+      }
+    }
+}
+}
 </script>

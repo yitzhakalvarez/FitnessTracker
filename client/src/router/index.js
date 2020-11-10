@@ -1,17 +1,42 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
-import Login from '../views/Login.vue';
-import Register from '../views/Register.vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
+import Admin from '../views/Admin.vue'
+import Food from '../views/Food.vue'
+import Exercise from '../views/Exercise.vue'
+import Profile from '../views/Profile.vue'
+import User from '../models/Users'
+
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile, meta: { IsSecret: true}
+  },
+  {
+    path: '/food',
+    name: 'Food',
+    component: Food, meta: { IsSecret: true}
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin, meta: { IsSecret: true}
+  },
+  {
+    path: '/exercise',
+    name: 'Exercise',
+    component: Exercise, meta: { IsSecret: true}
+  },
+  {
     path: '/register',
     name: 'Register',
     component: Register,
-    meta: { requiresAdmin: false, requiresLogin: false },
   },
   { 
     path: '/', 
@@ -22,7 +47,6 @@ const routes = [
     path: '/login', 
     name: 'Login', 
     component: Login,
-    meta: { requiresAdmin: false, requiresLogin: false },
     },
   {
     path: '/about',
@@ -35,11 +59,15 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes,
-});
+  routes
+})
 
+router.beforeEach( (to, from, next) => {
+    if( to.meta.IsSecret && !User.CurrentUser) next('/login');
+    else next();
+});
 
 
 export default router;
