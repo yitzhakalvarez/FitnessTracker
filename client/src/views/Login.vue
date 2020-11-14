@@ -8,7 +8,7 @@
             <div class="field">
               <label for="" class="label">Username</label>
               <div class="control has-icons-left">
-                <input type="username" placeholder="username" class="input" v-model="username" required>
+                <input type="username" id="Username" placeholder="username" class="input" v-model="username" required>
                 <span class="icon is-small is-left">
                   <i class="fa fa-envelope"></i>
                 </span>
@@ -17,7 +17,7 @@
             <div class="field">
               <label for="" class="label">Password</label>
               <div class="control has-icons-left">
-                <input type="password" placeholder="*******" class="input" v-model="password" required>
+                <input type="password" id="loginPassword" placeholder="*******" class="input" v-model="password" required>
                 <span class="icon is-small is-left">
                   <i class="fa fa-lock"></i>
                 </span>
@@ -48,41 +48,33 @@
 </template>
 
 <script>
-import User from "../models/Users";
-import { getFood } from "../models/Food";
-import { getExercise } from "../models/Exercise";
+  import * as api from '@/services/api_access';
 
-export default {
-  data(){
-    return {
-      email: '',
-      password: '',
-      error: '',
-      User
-    }
-  },
-   methods: {
-    async login() {
-      try {
-        await User.Login(this.email, this.password);
-        await getFood();
-        await getExercise();//await getExercise(this.email);
-        await getFriends();
-        await getSentRequests();
-        await getPendingRequests();
-        await getPosts();
-        await getFoodPosts();
-        
-        if(User.CurrentUser.IsAdmin == true) {
-          this.$router.push('/admin');
-         } 
-         else { 
-          this.$router.push('/profile');
-         }
-      } catch(error) {
-        this.error = error;
-      }
+  export default 
+  {
+    components: 
+    {
+    },
+        methods: {
+            //Login User
+            login() {
+                var Username = document.getElementById("Username").value;
+                var password = document.getElementById("loginPassword").value;
+                api.loginUser(Username, password).then(
+                    user => {
+                        if (user == "404")
+                            alert("Username or password is incorrect");
+                        else
+                            this.$router.push('/profile');
+                    }
+                );
+                //Prevent form submit refresh
+                event.preventDefault();
+            },
+
+        mounted() {
+            document.getElementById("loginForm").addEventListener('submit', this.login);
+        }
     }
   }
-}
 </script>
