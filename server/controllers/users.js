@@ -1,51 +1,49 @@
-/* B"H
-*/
-
 const express = require('express');
 const users = require('../models/users');
-
 const router = express.Router();
 
 router
-    .get('/', (req, res, next) => {
-        users.getAll().then(x=> res.send( x.map(user=> ({ ...user, Password: undefined}) ) ) )
-        .catch(next);
+    .get('/users/', (req, res, next) => {
+        users.getAll().then((data => res.send(data.map(user => ({ ...user, Password: undefined })))))
+            .catch(next);
     })
-    .get('/:id', (req, res, next) => {
+    .get('/users/:id', (req, res, next) => {
         const id = +req.params.id;
-        if(!id) return next();
-        users.get(id).then(x=> res.send( x ) )
-        .catch(next);
+        if (!id) {
+            return next();
+        } 
+        users.get(id).then(result => res.send(result))
+            .catch(next);
     })
-    .get('/types', (req, res, next) => {
-        users.getTypes().then(x=> res.send( x ) )
-        .catch(next);
+    .get('/users/types', (req, res, next) => {
+        users.getTypes().then(result => res.send(result))
+            .catch(next);
     })
-    .get('/search', (req, res, next) => {
-        users.search(req.query.q).then(x=> res.send( x ) )
-        .catch(next);
+    .get('/users/search', (req, res, next) => {
+        users.search(req.query.q).then(result => res.send(result))
+            .catch(next);
     })
-    .post('/', (req, res, next) => {
+    .post('/users/', (req, res, next) => {
         users.add(
             req.body.FirstName,
-            req.body.LastName, 
-            req.body.DOB, 
-            req.body.Password, 
-            users.Types.USER, 
+            req.body.LastName,
+            req.body.DOB,
+            req.body.Password,
+            users.Types.USER,
         ).then(newUser => {
-            res.send( newUser );
+            res.send(newUser);
         }).catch(next)
     })
     .post('/register', (req, res, next) => {
         users.register(
             req.body.FirstName,
-            req.body.LastName, 
-            req.body.DOB, 
-            req.body.Password, 
+            req.body.LastName,
+            req.body.DOB,
+            req.body.Password,
             users.Types.USER,
-            req.body.Email 
+            req.body.Email
         ).then(newUser => {
-            res.send( { ...newUser, Password: undefined } );
+            res.send({ ...newUser, Password: undefined });
         }).catch(next)
     })
     .post('/login', (req, res, next) => {
@@ -53,23 +51,24 @@ router
             req.body.email,
             req.body.password
         ).then(newUser => {
-            res.send( { ...newUser, Password: undefined } );
+            res.send({ ...newUser, Password: undefined });
         }).catch(next)
     })
-   .put('/:id', (req, res, next) => {
-        users.update( req.params.id,
+    .put('/users/:id', (req, res, next) => {
+        users.update(req.params.id,
             req.body.FirstName,
-            req.body.LastName, 
-            req.body.DOB, 
-            req.body.Password, 
-            users.Types.USER, 
+            req.body.LastName,
+            req.body.DOB,
+            req.body.Password,
+            users.Types.USER,
         ).then(newUser => {
-            res.send( newUser );
+            res.send(newUser);
         }).catch(next)
     })
-    .delete('/:id', (req, res, next) => {
+    .delete('/users/:id', (req, res, next) => {
         users.remove(req.params.id).then(msg => {
-            res.send( msg );
+            res.send(msg);
         }).catch(next)
     })
+
 module.exports = router;
