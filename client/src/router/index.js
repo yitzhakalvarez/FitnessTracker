@@ -6,9 +6,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Admin from '../views/Admin.vue'
-import Food from '../views/Food.vue'
 import Exercise from '../views/Exercise.vue'
-import Profile from '../views/Profile.vue'
 import User from '../models/Users'
 
 
@@ -16,17 +14,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile, meta: { IsSecret: true}
-  },
-  {
-    path: '/food',
-    name: 'Food',
-    component: Food, meta: { IsSecret: true}
-  },
-  {
-    path: '/admin',
+    path: '/FitnessTracker/admin',
     name: 'Admin',
     component: Admin, meta: { IsSecret: true}
   },
@@ -36,22 +24,22 @@ const routes = [
     component: Exercise, meta: { IsSecret: true}
   },
   {
-    path: '/register',
+    path: '/FitnessTracker/register',
     name: 'Register',
     component: Register,
   },
   { 
-    path: '/', 
+    path: '/FitnessTracker/home', 
     name: 'Home', 
     component: Home,
   },
   { 
-    path: '/login', 
+    path: '/FitnessTracker/login', 
     name: 'Login', 
     component: Login,
     },
   {
-    path: '/about',
+    path: '/FitnessTracker/about',
     name: 'About',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
