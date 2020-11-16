@@ -7,7 +7,7 @@
           Welcome to Yitzhak's Fitness Tracker          
         </h1>
         <h2 class="subtitle">
-          Make sure you register to keep up with your calories count below.
+          Make sure you register to keep up with your calories count.
         </h2>
         
       </div>
