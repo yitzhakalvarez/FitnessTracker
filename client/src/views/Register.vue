@@ -76,51 +76,25 @@
 
 
 <script>
-    import * as api from '@/services/api_access';
-
-    export default {
-        components: {
-        },
-                methods: {
-            signupUser() {
-                //Send Errors
-                if (heightFT < 0 || heightIN < 0 || weight < 0)
-                    alert("Signup Info Can Not Be Negitive");
-                else if (age < 15 || age >  80)
-                    alert("Please Provide An Age Between 15 And 80");
-                //Sign Up
-                else {
-                    var email = document.getElementById("signupEmail").value;
-                    var username = document.getElementById("signupUsername").value;
-                    var password = document.getElementById("signupPassword").value;
-                    var gender = document.getElementById("signupGender").value;
-                    var heightFT = document.getElementById("signupHeightFT").value;
-                    var heightIN = document.getElementById("signupHeightIN").value;
-                    var weight = document.getElementById("signupWeight").value;
-                    var age = document.getElementById("signupAge").value;
-                    var activityLevel = document.getElementById("signupActivity").value;
-                    var weightGoals = document.getElementById("signupWeightGoals").value;
-                    var BMR = 0;
-                    if (gender == "M")
-                        BMR = 66 + (6.23*weight) + (12.7*((heightFT*12) + (heightIN))) - (6.8*age) * activityLevel - weightGoals;
-                    else if (gender == "F")
-                        BMR = 655 + (4.35*weight) + (4.7*((heightFT*12) + (heightIN))) - (4.7*age) * activityLevel - weightGoals;
-
-                    api.signupUser(email, username, password, gender, heightFT, heightIN, weight, age, activityLevel, weightGoals, BMR).then(
-                        user => {
-                            if (user == "409")
-                                alert("Email or Username is taken");
-                            else
-                                this.$router.push('/profile');
-                        }
-                    );
-                }
-                //Prevent form submit refresh
-                event.preventDefault();
-            },
-        mounted() {
-            document.getElementById("register-form").addEventListener('submit', this.signupUser);
-        }
+//import { Feed } from "../models/Feed";
+export default {
+  data() {
+    return {
+      first_name: "",
+      last_name:"",
+      cpassword: "",
+      username: "",
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    signup() {
+      alert("this does nothing right now");
+      /*if (context.signup(this.name, this.username, this.email, this.password)) {
+      } else {
+      }*/
     }
-    }
+  }
+};
 </script>

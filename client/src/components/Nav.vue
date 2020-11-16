@@ -15,15 +15,15 @@
   
   <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': isActive }">    
     <div class="navbar-start">
-      <router-link to="/FitnessTracker/home" class="navbar-item">Home</router-link>
-      <router-link to="/FitnessTracker/about" class="navbar-item">About</router-link>
+      <router-link to="/" class="navbar-item">Home</router-link>
+      <router-link to="/about" class="navbar-item">About</router-link>
   </div>
   
   <div class="navbar-end">
     <div class="navbar-item">
       <div class="buttons">
-        <router-link to="/FitnessTracker/register" class="button is-primary">Register</router-link>
-        <router-link to="/FitnessTracker/login" class="button is-light">Log in</router-link>
+        <router-link to="/register" class="button is-primary">Register</router-link>
+        <router-link to="/login" class="button is-light">Log in</router-link>
       </div>
     </div>
   </div>
@@ -32,11 +32,18 @@
 </template>
 
 <script>
+import { Feed } from "../models/Feed";
 export default {
-  data: ()=> ({
-    isActive: ""
-  }),
+  data() {
+    return {
+      ctx: context.state
+    };
+  },
   methods: {
+    logout() {
+      context.logout();
+      this.$router.push("/");
+    }
   }
-}
+};
 </script>

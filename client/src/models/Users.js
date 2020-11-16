@@ -1,34 +1,59 @@
-import fetch from "./fetch";
+import { skeletonSchedule, exampleRoutine } from './DailyRoutines.js';
 
-let ob = {
-    CurrentUser: null,
-    async Login(email, password){
-        const user = await fetch('/user/login', { email, password });
-        console.log(user._doc._id);
-        return this.CurrentUser = user._doc;
+export const users = [
+    {
+        id: 1,
+        email: "test1@gmail.com",
+        name: 'Yitzhak Alvarez',    
+        handle: "alvarezy3",
+        password: "newpaltz",
+        admin: true,
+        loggedIn: false,
+        friends: [],
+        routine: exampleRoutine
     },
-    async Logout() {
-        const user = await fetch('/user/logout');
-        return this.CurrentUser = null;
+    {
+        id: 2,
+        email: "test2@gmail.com",
+        name: 'Zach Silver',    
+        handle: "zachs1",
+        password: "test",
+        admin: false,
+        loggedIn: false,
+        friends: [],
+        routine: skeletonSchedule
     },
-    async Register(email, first_name, last_name, pw, cpw){
-        const newUser = await fetch('/user/register', { email, first_name, last_name, pw, cpw});
-        return this.CurrentUser = newUser._doc;
-    }
-}
-
-export default ob;
-
-export let allSearches = null;
-
-export async function getUsers(userSearched) {
-    const users = await fetch('/user/getUser', { userSearched });
-    return allSearches = users;
-}
-
-export let otherUser = null;
-
-export async function getSingleUser(userClicked) {
-    const user = await fetch('/user/getSingleUser', { userClicked });
-    return otherUser = user;
-}
+    {
+        id: 3,
+        email: "test3@gmail.com",
+        name: 'Brad Thomas',    
+        handle: "thomas1",
+        password: "test",
+        admin: false,
+        loggedIn: false,
+        friends: [],
+        routine: skeletonSchedule
+    },
+    {
+        id: 4,
+        email: "test4@gmail.com",
+        name: 'Moshe Plotkin',    
+        handle: "moshe1",
+        password: "test",
+        admin: false,
+        loggedIn: false,
+        friends: [],
+        routine: skeletonSchedule
+    },
+    {
+        id: 5,
+        email: "test5@gmail.com",
+        name: 'Kenan Huckleberry',    
+        handle: "kenaberry",
+        password: "test",
+        admin: false,
+        loggedIn: false,
+        friends: [],
+        routine: skeletonSchedule
+    },
+]

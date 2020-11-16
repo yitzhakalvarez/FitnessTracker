@@ -1,33 +1,44 @@
-//Required Modules
+require('dotenv').config();
 const express = require('express');
-const app = express();
+const path = require('path');
+const users = require('./controllers/users');
+const app = express()
+const port = process.env.PORT || 3000;
 
-//app.use settings
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", " Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+//  Middleware
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use("/", express.static(__dirname + "/../dist/"));
+app.use(express.static( __dirname + '/../docs/'))
+
+//  Authentication
+app.use(function(req, res, next) {
+  const arr = (req.headers.authorization || "").split(" ");
+  if(arr.length > 1 && arr[1] != null){
+      req.userId = +arr[1];
+  }
+  next();
+});
+
+//  API
+app.get('/hello', (req, res, next) => {
+  res.send('Hello Hudson Valley! You requested ' + req.url)
+})
+
+app.use('/users', users);
+
+app.get('*', (req, res, next) => {
+    const filename = path.join(__dirname, '/../docs/index.html');
+    console.log(filename);
+    res.sendFile( filename );
+})
+
+app.use( (err, req, res, next) =>{
+    console.log(err);
+    res.status(err.status || 500).send( { message: err.message } )
+} )
 
 
-/*
-    Required For App
-*/
-//Methods for App
-const controller = require('./app/controller');
-app.use('/app', controller);
 
-const port = 81;
-
-//Server Stuff (Local Production)
-//const server = "localhost";
-//Server Stuff (Hosting)
-const server = "198.168.1.4";
-
-//Port listen and message
-app.listen(port);
-// eslint-disable-next-line no-console
-console.log(`listening on: http://${server}:${port}`);
+//  Init
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})

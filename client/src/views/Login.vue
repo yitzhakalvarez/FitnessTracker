@@ -48,33 +48,29 @@
 </template>
 
 <script>
-  import * as api from '@/services/api_access';
-
-  export default 
-  {
-    components: 
-    {
-    },
-        methods: {
-            //Login User
-            login() {
-                var Username = document.getElementById("Username").value;
-                var password = document.getElementById("loginPassword").value;
-                api.loginUser(Username, password).then(
-                    user => {
-                        if (user == "404")
-                            alert("Username or password is incorrect");
-                        else
-                            this.$router.push('/profile');
-                    }
-                );
-                //Prevent form submit refresh
-                event.preventDefault();
-            },
-
-        mounted() {
-            document.getElementById("loginForm").addEventListener('submit', this.login);
-        }
+import { Feed } from "../models/Feed";
+export default {
+  data() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
+  methods: {
+    login() {
+      if (context.login(this.username, this.password)) {
+        this.$buefy.toast.open({
+          message: "Successfully logged in",
+          type: "is-success"
+        });
+        this.$router.push("Log");
+      } else {
+        this.$buefy.toast.open({
+          message: "Login failed",
+          type: "is-danger"
+        });
+      }
     }
   }
+};
 </script>
