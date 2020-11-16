@@ -1,8 +1,8 @@
 const mysql = require('mysql');
 
 let port = 3306;
-let host =  sql9.freemysqlhosting.net;
-let name = sql9374528;
+let host =  sql3.freemysqlhosting.net;
+let name = sql3376190;
 let url = `mysql://${host}:${port}/${name}`;
 
 const con = mysql.createConnection({

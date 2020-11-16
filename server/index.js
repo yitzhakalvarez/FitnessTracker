@@ -1,21 +1,33 @@
+//Required Modules
 const express = require('express');
-const path = require('path');
-require('dotenv').config();
+const app = express();
 
-const users = require('./controllers/users');
-
-const app = express()
-const port = process.env.PORT || 3000;
-
-console.log(process.env.BEST_CLASS);
-
-//  Middleware
+//app.use settings
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", " Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(express.json());
-app.use(express.static( __dirname + '/../docs/'))
+app.use(express.urlencoded({extended: true}));
+app.use("/", express.static(__dirname + "/../dist/"));
 
 
+/*
+    Required For App
+*/
+//Methods for App
+const controller = require('./app/controller');
+app.use('/app', controller);
 
-//Init
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+const port = 81;
+
+//Server Stuff (Local Production)
+//const server = "localhost";
+//Server Stuff (Hosting)
+const server = "198.168.1.4";
+
+//Port listen and message
+app.listen(port);
+// eslint-disable-next-line no-console
+console.log(`listening on: http://${server}:${port}`);
