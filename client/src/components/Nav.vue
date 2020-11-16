@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="/">
+    <a class="navbar-item" href="yitzhakalvarez.github.io/FitnessTracker">
     <img src="../assets/weight.png">
     <strong class="is-size-4">Fitness Tracker</strong>
     </a>
@@ -15,39 +15,15 @@
   
   <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': isActive }">    
     <div class="navbar-start">
-      <router-link to="/" class="navbar-item">Home</router-link>
-      <router-link to="/about" class="navbar-item">About</router-link>
-
-      <a class="navbar-item">
-        Documentation
-      </a>
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        More
-      </a>
-      <div class="navbar-dropdown">
-        <a class="navbar-item">
-          About
-        </a>
-        <a class="navbar-item">
-          Jobs
-        </a>
-        <a class="navbar-item">
-          Contact
-        </a>
-        <hr class="navbar-divider">
-        <a class="navbar-item">
-          Report an issue
-        </a>
-      </div>
-    </div>
+      <router-link to="/FitnessTracker/home" class="navbar-item">Home</router-link>
+      <router-link to="/FitnessTracker/about" class="navbar-item">About</router-link>
   </div>
   
   <div class="navbar-end">
     <div class="navbar-item">
       <div class="buttons">
-        <router-link to="/register" class="button is-primary">Register</router-link>
-        <router-link to="/login" class="button is-light">Log in</router-link>
+        <router-link to="/FitnessTracker/register" class="button is-primary">Register</router-link>
+        <router-link to="/FitnessTracker/login" class="button is-light">Log in</router-link>
       </div>
     </div>
   </div>

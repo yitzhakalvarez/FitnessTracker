@@ -1,12 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
-//Routes
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Admin from '../views/Admin.vue'
-import Exercise from '../views/Exercise.vue'
 import User from '../models/Users'
 
 
@@ -14,14 +11,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: "/FitnessTracker/",
+    name: "home",
+    component: Home
+  },
+  {
     path: '/FitnessTracker/admin',
     name: 'Admin',
     component: Admin, meta: { IsSecret: true}
-  },
-  {
-    path: '/exercise',
-    name: 'Exercise',
-    component: Exercise, meta: { IsSecret: true}
   },
   {
     path: '/FitnessTracker/register',
