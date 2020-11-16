@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="yitzhakalvarez.github.io/FitnessTracker">
+    <a class="navbar-item" href="/FitnessTracker/home">
     <img src="../assets/weight.png">
     <strong class="is-size-4">Fitness Tracker</strong>
     </a>
