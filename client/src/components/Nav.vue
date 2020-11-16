@@ -1,8 +1,10 @@
 <template>
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
+    <a class="navbar-item">
     <img src="../assets/weight.png">
     <strong class="is-size-4">Fitness Tracker</strong>
+    </a>
     
     <a role="button" class="navbar-burger burger" :class="{ 'is-active': isActive }" @click="isActive = !isActive" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">      
     <span aria-hidden="true"></span>
