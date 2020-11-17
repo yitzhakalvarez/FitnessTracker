@@ -1,6 +1,11 @@
 # Live Website Deployment
 https://yitzhakalvarez.github.io/FitnessTracker/
 
+test account for editting exercises
+
+user:alvarezy3
+password:newpaltz
+
 
 ![Image of Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
 
