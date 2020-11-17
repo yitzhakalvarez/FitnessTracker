@@ -31,8 +31,8 @@
             </div>
             <div class="field is-grouped">
             <div class="control">
-          <router-link to="/Login" class="button is-primary is-medium">Login</router-link>
-            </div>
+              <button class="button is-primary is-medium" @click="login">Login</button>
+              </div>
             <div class="control">
           <router-link to="/Register" class="button is-primary is-medium">Register?</router-link>
             </div>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { Feed } from "../models/Feed";
+import { context } from "../models/context";
 export default {
   data() {
     return {
@@ -63,7 +63,7 @@ export default {
           message: "Successfully logged in",
           type: "is-success"
         });
-        this.$router.push("Log");
+        this.$router.push("schedule");
       } else {
         this.$buefy.toast.open({
           message: "Login failed",

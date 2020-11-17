@@ -16,7 +16,7 @@ export const skeletonSchedule = [
         name: 'Wednesday',
         exercises: []
     },
-    {
+    { 
         id: 4,
         name: 'Thursday',
         exercises: []

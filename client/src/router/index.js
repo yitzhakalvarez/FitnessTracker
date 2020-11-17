@@ -3,17 +3,30 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
-import Admin from '../views/Admin.vue'
-import Log from '../views/Log.vue'
+import Dashboard from '../views/Dashboard.vue'
+import Schedule from '../views/Schedule.vue'
+import {context} from '../models/context'
 
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/admin',
-    name: 'Admin',
-    component: Admin,
+    path: '/',
+    name: 'Home',
+    component: Home,
+    meta: { requiresAdmin: false, requiresLogin: false },
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: { requiresAdmin: false, requiresLogin: false },
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
     meta: { requiresAdmin: true, requiresLogin: true }
   },
   {
@@ -22,20 +35,10 @@ const routes = [
     component: Register,
     meta: { requiresAdmin: false, requiresLogin: false },
   },
-  { 
-    path: '/home', 
-    name: 'Home', 
-    component: Home,
-  },
-  { 
-    path: '/login', 
-    name: 'Login', 
-    component: Login,
-    },
   {
-    path: '/log',
-    name: 'Log',
-    component: Log,
+    path: '/schedule',
+    name: 'Schedule',
+    component: Schedule,
     meta: { requiresAdmin: false, requiresLogin: true },
   },
   {
@@ -56,8 +59,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  let Users = context.state.user;
-  if (Users === null && to.meta.requiresLogin) {
+  let users = context.state.user;
+  if (users === null && to.meta.requiresLogin) {
     next('/login')
   } else if (to.meta.requiresAdmin && !user.admin) {
     next('/home');

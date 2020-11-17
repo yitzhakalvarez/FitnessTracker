@@ -3,24 +3,32 @@ const users = require('../models/users');
 const router = express.Router();
 
 router
-    .get('/users/', (req, res, next) => {
+    .get('/users', (req, res, next) => {
         users.getAll().then((data => res.send(data.map(user => ({ ...user, Password: undefined })))))
+            .catch(next);
+    })
+    .get('/users/admins', (req, res, next) => {
+        users.getAllAdmins().then(result => res.send(result))
+            .catch(next);
+    })
+    .get('/users/search', (req, res, next) => {
+        users.searchByUsername(req.query.q).then(result => res.send(result))
             .catch(next);
     })
     .get('/users/:id', (req, res, next) => {
         const id = +req.params.id;
         if (!id) {
             return next();
-        } 
-        users.get(id).then(result => res.send(result))
+        }
+        users.getById(id).then(result => res.send(result))
             .catch(next);
     })
-    .get('/users/types', (req, res, next) => {
-        users.getTypes().then(result => res.send(result))
-            .catch(next);
-    })
-    .get('/users/search', (req, res, next) => {
-        users.search(req.query.q).then(result => res.send(result))
+    .get('/users/:id/followers', (req, res, next) => {
+        const id = +req.params.id;
+        if (!id) {
+            return next();
+        }
+        users.getFollowersForUser(id).then(result => res.send(result))
             .catch(next);
     })
     .post('/users/', (req, res, next) => {

@@ -24,17 +24,17 @@
 </template>
 
 <script>
-import { Feed } from "@/models/Feed";
-import Exercises from "@/components/Exercises";
+import { context } from "@/models/context";
+import Exercise from "@/components/Exercises";
 export default {
-  name: "Log",
+  name: "Schedule",
   data() {
     return {
       ctx: context.state
     };
   },
   components: {
-    Exercises
+    Exercise
   },
   methods: {
     promptExerciseGroup(dayId) {

@@ -8,7 +8,7 @@ let url = `mysql://${host}:${port}/${name}`;
 const con = mysql.createConnection({
     host: url,
     user: name,
-    password: ""
+    password: "wwdDGiWF4h"
   });
   
   con.connect(function(err) {

@@ -53,9 +53,9 @@
 </template>
 
 <script>
-import { Feed } from "../models/Feed";
+import { context } from "../models/context";
 export default {
-  props: ["Exercises", "dayId"],
+  props: ["exercises", "dayId"],
   data() {
     return {
       isOpen: false

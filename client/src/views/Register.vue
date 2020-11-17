@@ -76,7 +76,7 @@
 
 
 <script>
-//import { Feed } from "../models/Feed";
+//import { context } from "../models/context";
 export default {
   data() {
     return {

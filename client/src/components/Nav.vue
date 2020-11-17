@@ -17,13 +17,16 @@
     <div class="navbar-start">
       <router-link to="/" class="navbar-item">Home</router-link>
       <router-link to="/about" class="navbar-item">About</router-link>
-  </div>
+      <router-link to="/schedule" class="navbar-item">Schedule</router-link>
+      <router-link v-if="ctx.user !== null && ctx.user.admin" to="/dashboard" class="navbar-item">Dashboard</router-link>
+      </div>
   
   <div class="navbar-end">
     <div class="navbar-item">
       <div class="buttons">
-        <router-link to="/register" class="button is-primary">Register</router-link>
-        <router-link to="/login" class="button is-light">Log in</router-link>
+        <router-link v-if="ctx.user === null" to="/register" class="button is-primary">Register</router-link>
+        <router-link v-if="ctx.user === null" to="/login" class="button is-light">Log in</router-link>
+        <button v-if="ctx.user !== null" class="button is-primary" @click="logout">Log out</button>
       </div>
     </div>
   </div>
@@ -32,7 +35,7 @@
 </template>
 
 <script>
-import { Feed } from "../models/Feed";
+import { context } from "../models/context";
 export default {
   data() {
     return {
@@ -47,3 +50,6 @@ export default {
   }
 };
 </script>
+
+<style>
+</style>
