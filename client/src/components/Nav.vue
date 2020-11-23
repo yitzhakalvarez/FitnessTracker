@@ -18,7 +18,7 @@
       <router-link to="/" class="navbar-item">Home</router-link>
       <router-link to="/about" class="navbar-item">About</router-link>
       <router-link to="/schedule" class="navbar-item">Schedule</router-link>
-      <router-link v-if="ctx.user !== null && ctx.user.admin" to="/dashboard" class="navbar-item">Dashboard</router-link>
+      <router-link to="/dashboard" v-if="ctx.user !== null && ctx.user.admin" class="navbar-item">Dashboard</router-link>
       </div>
   
   <div class="navbar-end">
