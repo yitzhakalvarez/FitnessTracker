@@ -63,7 +63,7 @@ router.beforeEach((to, from, next) => {
   if (users === null && to.meta.requiresLogin) {
     next('/login')
   } else if (to.meta.requiresAdmin && !user.admin) {
-    next('/home');
+    next('/');
   } else {
     next();
   }

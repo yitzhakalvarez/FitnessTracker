@@ -74,27 +74,35 @@
 </form>
 </template>
 
-
 <script>
-//import { context } from "../models/context";
+import { mapActions } from "vuex";
 export default {
+  name: "Register",
+  components: {},
   data() {
     return {
-      first_name: "",
-      last_name:"",
-      cpassword: "",
-      username: "",
-      email: "",
-      password: ""
+      form: {
+        username: "",
+        email:"",
+        first_name: "",
+        last_name:"",
+        password: "",
+        cpassword:"",
+      },
+      showError: false
     };
   },
   methods: {
-    signup() {
-      alert("this does nothing right now");
-      /*if (context.signup(this.name, this.username, this.email, this.password)) {
-      } else {
-      }*/
-    }
-  }
+    ...mapActions(["Register"]),
+    async submit() {
+      try {
+        await this.Register(this.form);
+        this.$router.push("/schedule");
+        this.showError = false
+      } catch (error) {
+        this.showError = true
+      }
+    },
+  },
 };
 </script>

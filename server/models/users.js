@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 const db = require('../db/database');
 
+const PREFIX = process.env.MYSQL_TABLE_PREFIX || 'Fall2020_'
 const SALT_ROUNDS = process.env.SALT_ROUNDS || 8;
+const Types = { ADMIN:5, USER:6 };
 
 async function getAll() {
     return await db.query(`SELECT * FROM Users`);
@@ -16,11 +18,11 @@ async function getById(userId) {
 }
 
 async function getAllAdmins() {
-    return await db.query(`SELECT * FROM Users WHERE admin=true`)
+    return await db.query(`SELECT * FROM users WHERE admin=true`)
 }
 
 async function getById(userId) {
-    const results = await db.query(`SELECT * FROM Users WHERE id=?`, [userId])
+    const results = await db.query(`SELECT * FROM users WHERE id=?`, [userId])
     if (!results.length) {
         return { status: 404, message: "Sorry, there is no such user" };
     }
