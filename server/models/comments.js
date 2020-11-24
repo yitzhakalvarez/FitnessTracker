@@ -1,7 +1,6 @@
-/* B"H
-*/
 const db = require('../db/database');
 
+const PREFIX = process.env.MYSQL_TABLE_PREFIX || 'FitnessTracker_';
 
 async function getAll(){
     console.log("Called Get All")
