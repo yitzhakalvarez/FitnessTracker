@@ -1,393 +1,290 @@
--- phpMyAdmin SQL Dump
--- version 4.7.1
--- https://www.phpmyadmin.net/
---
--- Host: sql9.freemysqlhosting.net
--- Generation Time: Nov 05, 2020 at 06:05 PM
--- Server version: 5.5.62-0ubuntu0.14.04.1
--- PHP Version: 7.0.33-0ubuntu0.16.04.3
+-- MySQL Workbench Forward Engineering
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Fitness Tracker Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Table `Types`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FitnessTracker_Types` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME NOT NULL,
+  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Name` VARCHAR(45) NOT NULL,
+  `Type_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_FitnessTracker_Types_Types1_idx` (`Type_id` ASC) ,
+  UNIQUE INDEX `FitnessTracker_Name_UNIQUE` (`Name` ASC) ,
+  CONSTRAINT `fk_FitnessTracker_Types_Types1`
+    FOREIGN KEY (`Type_id`)
+    REFERENCES `FitnessTracker_Types` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FitnessTracker_Users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME NOT NULL,
+  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `DOB` DATETIME NULL,
+  `Password` VARCHAR(45) NULL,
+  `User_Type` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_FitnessTracker_Users_Types1_idx` (`User_Type` ASC) ,
+  CONSTRAINT `fk_FitnessTracker_Users_Types1`
+    FOREIGN KEY (`User_Type`)
+    REFERENCES `FitnessTracker_Types` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ContactMethods`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FitnessTracker_ContactMethods` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME NOT NULL,
+  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Type` VARCHAR(45) NOT NULL,
+  `Value` VARCHAR(45) NOT NULL,
+  `IsPrimary` BIT NOT NULL DEFAULT 0,
+  `CanSpam` BIT NOT NULL DEFAULT 0,
+  `User_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_FitnessTracker_ContactMethods_Users_idx` (`User_id` ASC) ,
+  INDEX `fk_FitnessTracker_ContactMethod_Type_idx` (`Type` ASC) ,
+  CONSTRAINT `fk_FitnessTracker_ContactMethods_Users`
+    FOREIGN KEY (`User_id`)
+    REFERENCES `FitnessTracker_Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FitnessTracker_ContactMethod_Type`
+    FOREIGN KEY (`Type`)
+    REFERENCES `FitnessTracker_Types` (`Name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Exercise_Types`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FitnessTracker_Exercise_Types` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME NOT NULL,
+  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Name` VARCHAR(45) NOT NULL,
+  `Type` VARCHAR(45) NOT NULL, -- Strength, Cardio, etc.
+  `Muscle_Group` VARCHAR(45) NOT NULL,
+  `Video_Url` VARCHAR(500) NOT NULL,
+  `Relative_Dificulty` FLOAT NOT NULL DEFAULT '1.0',
+
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `ix_FitnessTracker_Exercise_Types_Name_UNIQUE` (`Name` ASC) ,
+  INDEX `fk_FitnessTracker_Exercise_Types_Types1_idx` (`Type` ASC) ,
+  CONSTRAINT `fk_FitnessTracker_Exercise_Types_Types1_Types1`
+    FOREIGN KEY (`Type`)
+    REFERENCES `FitnessTracker_Types` (`Name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  INDEX `fk_FitnessTracker_Exercise_Types_Muscle_Group_idx` (`Muscle_Group` ASC) ,
+  CONSTRAINT `fk_FitnessTracker_Exercise_Types_Muscle_Group`
+    FOREIGN KEY (`Muscle_Group`)
+    REFERENCES `FitnessTracker_Types` (`Name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Workouts`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FitnessTracker_Workouts` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME NOT NULL,
+  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Owner_id` INT NOT NULL,
+  `Privacy_Setting` INT NULL COMMENT '0 - hidden\n1 - only me\n2 - only friends\n4 - public',
+  `Start_Time` DATETIME NOT NULL,
+  `End_Time` DATETIME NOT NULL,
+  `Exercise_Type` VARCHAR(45) NOT NULL,
+  `Note` VARCHAR(4000) NULL,
+
+  -- Cardio Session Detials
+  `Distance` FLOAT NULL, -- miles or fractions therof
+
+  -- Strength Session Details
+  `Sets` INT NULL,
+  `Reps_Per_Set` INT NULL,
+  `Weight` FLOAT NULL,
+
+  INDEX `fk_FitnessTracker_Workouts_Users1_idx` (`Owner_id` ASC) ,
+  INDEX `fk_FitnessTracker_Workout_Type_idx` (`Exercise_Type` ASC) ,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_FitnessTracker_Workout_Users1`
+    FOREIGN KEY (`Owner_id`)
+    REFERENCES `FitnessTracker_Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FitnessTracker_Workout_Exercise_Types`
+    FOREIGN KEY (`Exercise_Type`)
+    REFERENCES `FitnessTracker_Exercise_Types` (`Name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Followers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FitnessTracker_Followers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME NOT NULL,
+  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Following_id` INT NOT NULL,
+  `Follower_id` INT NOT NULL,
+  `IsAccepted` BIT NOT NULL DEFAULT 0,
+
+  PRIMARY KEY (`id`),
+  INDEX `fk_FitnessTracker_Followers_Following_idx` (`Following_id` ASC) ,
+  CONSTRAINT `fk_FitnessTracker_Followers_Following`
+    FOREIGN KEY (`Following_id`)
+    REFERENCES `FitnessTracker_Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  INDEX `fk_FitnessTracker_Followers_Follower_idx` (`Follower_id` ASC) ,
+  CONSTRAINT `fk_FitnessTracker_Followers_Follower`
+    FOREIGN KEY (`Follower_id`)
+    REFERENCES `FitnessTracker_Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `Comments`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FitnessTracker_Comments` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME NOT NULL,
+  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Text` VARCHAR(4000) NULL,
+  `Workout_id` INT NOT NULL,
+  `Owner_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_FitnessTracker_Comments_Workouts1_idx` (`Workout_id` ASC) ,
+  INDEX `fk_FitnessTracker_Comments_Users1_idx` (`Owner_id` ASC) ,
+  CONSTRAINT `fk_FitnessTracker_Comments_Workouts1`
+    FOREIGN KEY (`Workout_id`)
+    REFERENCES `FitnessTracker_Workouts` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FitnessTracker_Comments_Users1`
+    FOREIGN KEY (`Owner_id`)
+    REFERENCES `FitnessTracker_Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Reactions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FitnessTracker_Reactions` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME NOT NULL,
+  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Emoji` VARCHAR(2) NULL,
+  `Workout_id` INT NOT NULL,
+  `Owner_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_FitnessTracker_Comments_Workouts1_idx` (`Workout_id` ASC) ,
+  INDEX `fk_FitnessTracker_Comments_Users1_idx` (`Owner_id` ASC) ,
+  CONSTRAINT `fk_FitnessTracker_Comments_Workouts10`
+    FOREIGN KEY (`Workout_id`)
+    REFERENCES `FitnessTracker_Workouts` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FitnessTracker_Comments_Users10`
+    FOREIGN KEY (`Owner_id`)
+    REFERENCES `FitnessTracker_Users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Emojis`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FitnessTracker_Emojis` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME NOT NULL,
+  `update_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Name` VARCHAR(45) NOT NULL,
+  `Description` VARCHAR(500) NULL,
+  `Code` VARCHAR(2) NOT NULL,
+  `Type_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `FitnessTracker_Name_UNIQUE` (`Name` ASC) ,
+  UNIQUE INDEX `FitnessTracker_Code_UNIQUE` (`Code` ASC) ,
+  INDEX `fk_Emojis_Types1_idx` (`Type_id` ASC) ,
+  CONSTRAINT `fk_FitnessTracker_Emojis_Types1`
+    FOREIGN KEY (`Type_id`)
+    REFERENCES `FitnessTracker_Types` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `Types`
+-- -----------------------------------------------------
 START TRANSACTION;
-SET time_zone = "+00:00";
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (1, 'Now()', DEFAULT, 'Types', 1);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (2, 'Now()', DEFAULT, 'User Types', 1);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (3, 'Now()', DEFAULT, 'Media Types', 1);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (4, 'Now()', DEFAULT, 'Contact Method Types', 1);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (20, 'Now()', DEFAULT, 'Emoji Types', 1);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (5, 'Now()', DEFAULT, 'Admin', 2);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (6, 'Now()', DEFAULT, 'User', 2);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (DEFAULT, 'Now()', DEFAULT, 'image/gif', 3);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (DEFAULT, 'Now()', DEFAULT, 'image/jpeg', 3);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (DEFAULT, 'Now()', DEFAULT, 'image/pngvideo', 3);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (DEFAULT, 'Now()', DEFAULT, 'video/webm', 3);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (DEFAULT, 'Now()', DEFAULT, 'video/ogg', 3);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (DEFAULT, 'Now()', DEFAULT, 'Email', 4);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (DEFAULT, 'Now()', DEFAULT, 'Cell Phone', 4);
+INSERT INTO `FitnessTracker_Types` (`id`, `created_at`, `update_at`, `Name`, `Type_id`) VALUES (420, 'Now()', DEFAULT, 'Reactions', 20);
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `sql3376190`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Comments`
---
-
-CREATE TABLE `Comments` (
-  `id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `content` text NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `owner_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ContactMethods`
---
-
-CREATE TABLE `ContactMethods` (
-  `id` int(11) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `type_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Days`
---
-
-CREATE TABLE `Days` (
-  `id` int(11) NOT NULL,
-  `owner_id` int(11) NOT NULL,
-  `name` varchar(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Excercises`
---
-
-CREATE TABLE `Excercises` (
-  `id` int(11) NOT NULL,
-  `target_muscle_group` varchar(50) NOT NULL,
-  `exercise_description` text NOT NULL,
-  `day_id` int(11) NOT NULL,
-  `type_id` int(11) NOT NULL,
-  `is_discoverable` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `FollowerRequests`
---
-
-CREATE TABLE `FollowerRequests` (
-  `id` int(11) NOT NULL,
-  `from_user_id` int(11) NOT NULL,
-  `to_user_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Followers`
---
-
-CREATE TABLE `Followers` (
-  `id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `user_id` int(11) NOT NULL,
-  `follower_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Following`
---
-
-CREATE TABLE `Following` (
-  `id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `user_id` int(11) NOT NULL,
-  `follower_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Posts`
---
-
-CREATE TABLE `Posts` (
-  `id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `description` text NOT NULL,
-  `exercise_id` int(11) NOT NULL,
-  `owner_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Reactions`
---
-
-CREATE TABLE `Reactions` (
-  `id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `is_like` tinyint(1) NOT NULL,
-  `is_dislike` tinyint(1) NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `owner_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Types`
---
-
-CREATE TABLE `Types` (
-  `id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `type_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Users`
---
-
-CREATE TABLE `Users` (
-  `id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `birth_date` datetime NOT NULL,
-  `username` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `Comments`
---
-ALTER TABLE `Comments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `post_id` (`post_id`),
-  ADD KEY `owner_id` (`owner_id`);
-
---
--- Indexes for table `ContactMethods`
---
-ALTER TABLE `ContactMethods`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `type_id` (`type_id`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Indexes for table `Days`
---
-ALTER TABLE `Days`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `owner_id` (`owner_id`);
-
---
--- Indexes for table `Excercises`
---
-ALTER TABLE `Excercises`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `day_id` (`day_id`),
-  ADD KEY `type_id` (`type_id`);
-
---
--- Indexes for table `FollowerRequests`
---
-ALTER TABLE `FollowerRequests`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `from_user_id` (`from_user_id`),
-  ADD KEY `to_user_id` (`to_user_id`);
-
---
--- Indexes for table `Followers`
---
-ALTER TABLE `Followers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `follower_id` (`follower_id`);
-
---
--- Indexes for table `Following`
---
-ALTER TABLE `Following`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `follower_id` (`follower_id`);
-
---
--- Indexes for table `Posts`
---
-ALTER TABLE `Posts`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `exercise_id` (`exercise_id`),
-  ADD KEY `owner_id` (`owner_id`);
-
---
--- Indexes for table `Reactions`
---
-ALTER TABLE `Reactions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `post_id` (`post_id`),
-  ADD KEY `owner_id` (`owner_id`);
-
---
--- Indexes for table `Types`
---
-ALTER TABLE `Types`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `type_id` (`type_id`);
-
---
--- Indexes for table `Users`
---
-ALTER TABLE `Users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `Comments`
---
-ALTER TABLE `Comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `Days`
---
-ALTER TABLE `Days`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `Excercises`
---
-ALTER TABLE `Excercises`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `Followers`
---
-ALTER TABLE `Followers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `Following`
---
-ALTER TABLE `Following`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `Posts`
---
-ALTER TABLE `Posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `Reactions`
---
-ALTER TABLE `Reactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `Types`
---
-ALTER TABLE `Types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `Users`
---
-ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `Comments`
---
-ALTER TABLE `Comments`
-  ADD CONSTRAINT `Comments_ibfk_2` FOREIGN KEY (`owner_id`) REFERENCES `Users` (`id`),
-  ADD CONSTRAINT `Comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `Posts` (`id`);
-
---
--- Constraints for table `ContactMethods`
---
-ALTER TABLE `ContactMethods`
-  ADD CONSTRAINT `ContactMethods_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `Types` (`id`),
-  ADD CONSTRAINT `ContactMethods_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
-
---
--- Constraints for table `Excercises`
---
-ALTER TABLE `Excercises`
-  ADD CONSTRAINT `Excercises_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `Types` (`id`),
-  ADD CONSTRAINT `Excercises_ibfk_1` FOREIGN KEY (`day_id`) REFERENCES `Days` (`id`);
-
---
--- Constraints for table `FollowerRequests`
---
-ALTER TABLE `FollowerRequests`
-  ADD CONSTRAINT `FollowerRequests_ibfk_2` FOREIGN KEY (`to_user_id`) REFERENCES `Users` (`id`),
-  ADD CONSTRAINT `FollowerRequests_ibfk_1` FOREIGN KEY (`from_user_id`) REFERENCES `Users` (`id`);
-
---
--- Constraints for table `Followers`
---
-ALTER TABLE `Followers`
-  ADD CONSTRAINT `Followers_ibfk_2` FOREIGN KEY (`follower_id`) REFERENCES `Users` (`id`),
-  ADD CONSTRAINT `Followers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
-
---
--- Constraints for table `Following`
---
-ALTER TABLE `Following`
-  ADD CONSTRAINT `Following_ibfk_2` FOREIGN KEY (`follower_id`) REFERENCES `Users` (`id`),
-  ADD CONSTRAINT `Following_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
-
---
--- Constraints for table `Posts`
---
-ALTER TABLE `Posts`
-  ADD CONSTRAINT `Posts_ibfk_2` FOREIGN KEY (`exercise_id`) REFERENCES `Excercises` (`id`),
-  ADD CONSTRAINT `Posts_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `Users` (`id`);
-
---
--- Constraints for table `Reactions`
---
-ALTER TABLE `Reactions`
-  ADD CONSTRAINT `Reactions_ibfk_2` FOREIGN KEY (`owner_id`) REFERENCES `Users` (`id`),
-  ADD CONSTRAINT `Reactions_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `Posts` (`id`);
-
---
--- Constraints for table `Types`
---
-ALTER TABLE `Types`
-  ADD CONSTRAINT `Types_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `Types` (`id`);
-
---
--- Constraints for table `Users`
---
-ALTER TABLE `Users`
-  ADD CONSTRAINT `Users_ibfk_1` FOREIGN KEY (`id`) REFERENCES `Days` (`owner_id`);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- -----------------------------------------------------
+-- Data for table `Emojis`
+-- -----------------------------------------------------
+START TRANSACTION;
+INSERT INTO `FitnessTracker_Emojis` (`id`, `created_at`, `update_at`, `Name`, `Description`, `Code`, `Type_id`) VALUES (DEFAULT, 'Now()', '', 'red_heart', 'red heart - U+2764', '❤️', 420);
+COMMIT;
+
+-- -----------------------------------------------------
+-- Other tables to think about
+-- -----------------------------------------------------
+
+-- Track water consumption
+-- Track weight ofer time
+-- Keep track of goals (and if/when the user reaches them)
