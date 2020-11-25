@@ -1,10 +1,10 @@
-# Live Website Deployment: <image align="left" width="150" height="150" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/weight.png">
+# Live Website Deployment: <a href="https://fitness-trak.herokuapp.com/" image align="left" width="150" height="150" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/weight.png"></a>
 - https://fitness-trak.herokuapp.com/
 - user: alvarezy3
 - password: newpaltz
 
 
-# Fall 2020 Web Programming: <img align="left" width="350" height="350" src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg">
+# Fall 2020 Web Programming: <a href="https://github.com/yitzhakalvarez/FitnessTracker" img align="left" width="350" height="350" src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg"></a>
 
 This repository documents my project done for **CPS493**.
 1. **Personal Information:**
