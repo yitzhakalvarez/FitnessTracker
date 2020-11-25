@@ -13,6 +13,6 @@ This repository documents my project done for **CPS493**.
 
     Major: *Computer Science*
 
-    Minor: *Economics*
-- **Class Start Date:** August 24, 2020
-- **Class End Date:** December 3, 2020
+     Minor: *Economics*
+     - **Class Start Date:** August 24, 2020
+    - **Class End Date:** December 3, 2020
