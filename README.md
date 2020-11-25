@@ -8,7 +8,7 @@ user: alvarezy3
 password: newpaltz
 
 
-![Image of Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
+<img align="left" width="150" height="150" src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg">
 
 # Fall 2020 Web Programming
 
