@@ -1,5 +1,6 @@
+![Image of Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
+
 # Fall 2020 Web Programming: 
-<a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="left" width="200" height="245" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/newpaltz.png"></a>
 
 This repository documents my project done for **CPS493**.
 - **Personal Information:**
@@ -13,7 +14,7 @@ This repository documents my project done for **CPS493**.
 - **Class End Date:** December 3, 2020
 
 # Live Website Deployment: 
-<a href="https://fitness-trak.herokuapp.com/"><img align="left" width="90" height="90" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/weight.png"></a>
+<a href="https://fitness-trak.herokuapp.com/"><img align="left" width="90" height="90" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/weight.jpg"></a>
 - https://fitness-trak.herokuapp.com/
 - user: alvarezy3
 - password: newpaltz
