@@ -1,5 +1,5 @@
 # Live Website Deployment: 
-<a href="https://fitness-trak.herokuapp.com/"><img align="left" width="150" height="150" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/weight.png"></a>
+<a href="https://fitness-trak.herokuapp.com/"><img align="left" width="90" height="90" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/weight.png"></a>
 - https://fitness-trak.herokuapp.com/
 - user: alvarezy3
 - password: newpaltz
