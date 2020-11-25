@@ -8,9 +8,7 @@ user: alvarezy3
 password: newpaltz
 
 
-<img align="left" width="150" height="150" src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg">
-
-# Fall 2020 Web Programming
+# Fall 2020 Web Programming: <img align="left" width="150" height="150" src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg">
 
 This repository documents my project done for **CPS493**.
 
