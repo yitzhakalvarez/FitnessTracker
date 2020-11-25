@@ -19,4 +19,4 @@ This repository documents my project done for **CPS493**.
 - user: alvarezy3
 - password: newpaltz
 
-![alt text](.../assets/weight.png)
+![alt text](./client/src/assets/weight.png)
