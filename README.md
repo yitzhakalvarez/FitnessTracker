@@ -12,6 +12,7 @@ This repository documents my project done for **CPS493**.
 Name: Yitzhak Alvarez
 
 Major: *Computer Science*
+
 Minor: *Economics*   
 - **Class Start Date:** August 24, 2020
 - **Class End Date:** December 3, 2020
