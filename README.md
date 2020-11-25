@@ -17,6 +17,3 @@ This repository documents my project done for **CPS493**.
 - https://fitness-trak.herokuapp.com/
 - user: alvarezy3
 - password: newpaltz
-
-
-
