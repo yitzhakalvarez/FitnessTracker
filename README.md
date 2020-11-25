@@ -7,10 +7,8 @@
 # Fall 2020 Web Programming: <a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="left" width="280" height="180" src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg"></a>
 
 This repository documents my project done for **CPS493**.
-1. **Personal Information:**
-
+- **Personal Information:**
 Name: Yitzhak Alvarez
-
 Major: *Computer Science* | Minor: *Economics*   
-2. **Class Start Date:** August 24, 2020
-3. **Class End Date:** December 3, 2020
+- **Class Start Date:** August 24, 2020
+- **Class End Date:** December 3, 2020
