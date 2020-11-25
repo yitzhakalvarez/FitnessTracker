@@ -1,6 +1,5 @@
 # Live Website Deployment: <image align="left" width="250" height="250" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/weight.png">
 - https://fitness-trak.herokuapp.com/
-- test account for editting exercises
 - user: alvarezy3
 - password: newpaltz
 
