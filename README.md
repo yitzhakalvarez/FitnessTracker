@@ -1,5 +1,5 @@
 # Fall 2020 Web Programming: 
-<a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="left" width="200" height="250" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/newpaltz.png"></a>
+<a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="left" width="200" height="245" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/newpaltz.png"></a>
 
 This repository documents my project done for **CPS493**.
 - **Personal Information:**
