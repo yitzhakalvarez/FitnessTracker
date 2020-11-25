@@ -1,4 +1,4 @@
-# Live Website Deployment: <image align="left" width="250" height="250" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/weight.png">
+# Live Website Deployment: <image align="left" width="150" height="150" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/weight.png">
 - https://fitness-trak.herokuapp.com/
 - user: alvarezy3
 - password: newpaltz
