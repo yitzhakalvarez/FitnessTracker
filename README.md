@@ -4,7 +4,9 @@
 - password: newpaltz
 
 
-# Fall 2020 Web Programming: <a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="right" width="270" height="250" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/newpaltz.png"></a>
+<a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="right" width="270" height="250" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/newpaltz.png"></a>
+
+# Fall 2020 Web Programming:
 
 This repository documents my project done for **CPS493**.
 - **Personal Information:**
