@@ -3,7 +3,7 @@
 - user: alvarezy3
 - password: newpaltz
 
-<a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="center" width="350" height="200" src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg"></a>
+<a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="center" width="250" height="200" src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg"></a>
 
 # Fall 2020 Web Programming
 
