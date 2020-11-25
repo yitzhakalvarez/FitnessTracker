@@ -1,4 +1,5 @@
-# Live Website Deployment
+# Live Website Deployment: <image align="left" width="350" height="350" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/weight.png">
+
 https://fitness-trak.herokuapp.com/
 
 test account for editting exercises
