@@ -3,9 +3,8 @@
 - user: alvarezy3
 - password: newpaltz
 
-<a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="center" width="200" height="200" src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg"></a>
 
-# Fall 2020 Web Programming
+# Fall 2020 Web Programming: <a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="left" width="250" height="200" src="https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg"></a>
 
 This repository documents my project done for **CPS493**.
 - **Personal Information:**
