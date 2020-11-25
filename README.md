@@ -4,7 +4,7 @@
 - password: newpaltz
 
 
-<a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="right" width="270" height="250" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/newpaltz.png"></a>
+<a href="https://github.com/yitzhakalvarez/FitnessTracker"><img align="left" width="270" height="250" src="https://github.com/yitzhakalvarez/FitnessTracker/blob/master/client/src/assets/newpaltz.png"></a>
 
 # Fall 2020 Web Programming:
 
