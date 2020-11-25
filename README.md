@@ -1,5 +1,5 @@
 # Live Website Deployment
-https://yitzhakalvarez.github.io/FitnessTracker/
+https://fitness-trak.herokuapp.com/
 
 test account for editting exercises
 
