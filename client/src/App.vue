@@ -1,10 +1,10 @@
 <template>
-    <div class="">
-      <Nav />
-      <div class="container">
-      <router-view/>
-      </div>
+  <div class="">
+    <Nav />
+    <div class="container">
+      <router-view />
     </div>
+  </div>
 </template>
 
 <script>
@@ -13,8 +13,7 @@ export default {
   components: {
     Nav
   }
-}
-</script> 
+};
+</script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
