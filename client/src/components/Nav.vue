@@ -44,13 +44,13 @@
             <router-link
               v-if="ctx.user === null"
               to="/register"
-              class="button is-primary"
+              class="button is-primary is-rounded"
               >Register</router-link
             >
             <router-link
               v-if="ctx.user === null"
               to="/login"
-              class="button is-light"
+              class="button is-light is-rounded"
               >Log in</router-link
             >
             <button
@@ -69,10 +69,12 @@
 
 <script>
 import { context } from "../models/context";
+
 export default {
   data() {
     return {
-      ctx: context.state
+      ctx: context.state,
+      isActive: false
     };
   },
   methods: {

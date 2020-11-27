@@ -104,12 +104,12 @@
               </div>
               <div class="field is-grouped">
                 <div class="control">
-                  <router-link to="/login" class="button is-light is-medium"
+                  <router-link to="/login" class="button is-light is-medium is-rounded"
                     >Cancel</router-link
                   >
                 </div>
                 <div class="control">
-                  <button class="button is-primary is-medium" type="submit">
+                  <button class="button is-primary is-medium is-rounded" type="submit">
                     Register
                   </button>
                 </div>

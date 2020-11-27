@@ -1,9 +1,10 @@
+/* eslint-disable */
 <template>
   <form>
     <div class="hero-body">
       <div class="container">
         <div class="columns is-centered">
-          <div class="column is-5-tablet is-5-desktop is-3-widescreen">
+          <div class="column is-5-tablet is-4-desktop is-3-widescreen">
             <form action="" class="box" @submit.prevent="login">
               <div class="field">
                 <label for="" class="label">Username</label>
@@ -43,15 +44,15 @@
                   Remember me
                 </label>
               </div>
-              <div class="field is-grouped">
+              <div class="field is-grouped is-grouped-multiline">
                 <div class="control">
-                  <button class="button is-primary is-medium" @click="login">
+                  <button class="button is-primary is-small is-rounded" @click="login">
                     Login
                   </button>
                 </div>
                 <div class="control">
                   <button
-                    class="button is-primary is-medium"
+                    class="button is-link is-small is-rounded"
                     @click.prevent="fbLogin"
                   >
                     FB-Login
@@ -59,16 +60,14 @@
                 </div>
                 <div class="control">
                   <button
-                    class="button is-primary is-medium"
+                    class="button is-primary is-small is-rounded"
                     @click.prevent="googleLogin"
                   >
                     Google Login
                   </button>
                 </div>
                 <div class="control">
-                  <router-link
-                    to="/Register"
-                    class="button is-primary is-medium"
+                  <router-link to="/Register" class="button is-primary is-small is-rounded"
                     >Register?</router-link
                   >
                 </div>
@@ -104,38 +103,7 @@ export default {
           type: "is-danger"
         });
       }
-    },
-    fbLogin() {
-      FB.login(
-        function(authInfo) {
-          console.log(authInfo);
-        },
-        { scope: "public_profile,email" }
-      );
-    },
-    googleLogin() {}
+    }
   }
-};
-window.fbAsyncInit = function() {
-  FB.init({
-    appId: "385069659231960",
-    cookie: true,
-    xfbml: true,
-    version: "v9.0"
-  });
-
-  FB.AppEvents.logPageView();
-};
-
-(function(d, s, id) {
-  var js,
-    fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {
-    return;
-  }
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://connect.facebook.net/en_US/sdk.js";
-  fjs.parentNode.insertBefore(js, fjs);
-})(document, "script", "facebook-jssdk");
+}
 </script>
