@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
@@ -30,6 +31,7 @@
         <router-link to="/" class="navbar-item">Home</router-link>
         <router-link to="/about" class="navbar-item">About</router-link>
         <router-link to="/schedule" class="navbar-item">Schedule</router-link>
+        <router-link to="/profile" class="navbar-item">Profile</router-link>
         <router-link
           to="/dashboard"
           v-if="ctx.user !== null && ctx.user.admin"

@@ -10,7 +10,9 @@
             Make sure you register to keep up with your calories count.
           </h2>
           <div class="control">
-            <router-link to="/register" class="btn button is-primary is-medium is-rounded"
+            <router-link
+              to="/register"
+              class="btn button is-primary is-medium is-rounded"
               >Register</router-link
             >
           </div>

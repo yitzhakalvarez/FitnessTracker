@@ -46,7 +46,10 @@
               </div>
               <div class="field is-grouped is-grouped-multiline">
                 <div class="control">
-                  <button class="button is-primary is-small is-rounded" @click="login">
+                  <button
+                    class="button is-primary is-small is-rounded"
+                    @click="login"
+                  >
                     Login
                   </button>
                 </div>
@@ -67,7 +70,9 @@
                   </button>
                 </div>
                 <div class="control">
-                  <router-link to="/Register" class="button is-primary is-small is-rounded"
+                  <router-link
+                    to="/Register"
+                    class="button is-primary is-small is-rounded"
                     >Register?</router-link
                   >
                 </div>
@@ -105,5 +110,5 @@ export default {
       }
     }
   }
-}
+};
 </script>

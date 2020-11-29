@@ -2,7 +2,6 @@ export const exampleExercises = [
   {
     name: "Abs", //represents the muscle group
     finished: false,
-
     activities: [
       {
         type: "Crunches", //represents the activity name

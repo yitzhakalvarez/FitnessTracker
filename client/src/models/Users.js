@@ -57,3 +57,9 @@ export const users = [
     routine: skeletonSchedule
   }
 ];
+
+import { myFetch } from "./myfetch";
+
+export function getList() {
+  return myFetch("users");
+}

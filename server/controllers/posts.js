@@ -3,7 +3,7 @@ const posts = require('../models/posts');
 const comments = require('../models/comments');
 const reactions = require('../models/reactions');
 
-const router = express.Router();
+const router   = express.Router();
 
 router
     .get('/', (req, res, next) => {
@@ -16,24 +16,18 @@ router
         posts.get(id).then(x=> res.send( x ) )
         .catch(next);
     })
-    .get('/byUser/:id', (req, res, next) => {
-        const id = +req.params.id;
-        if(!id) return next();
-        posts.getByUser(id).then(x=> res.send( x ) )
-        .catch(next);
-    })
     .get('/:id/comments', (req, res, next) => {
         const id = +req.params.id;
         if(!id) return next();
-        comments.getForPost(id).then(x=> res.send( x ) )
+        comments.getForPost(id).then(x => res.send( x ) )
         .catch(next);
     })
-    .get('/:id/reactions', (req, res, next) => {
-        const id = +req.params.id;
-        if(!id) return next();
-        reactions.getForPost(id).then(x=> res.send( x ) )
-        .catch(next);
-    })
+    //.get('/:id/votes', (req, res, next) => {
+    //    const id = +req.params.id;
+    //    if(!id) return next();
+    //    reactions.getForPost(id).then(x=> res.send( x ) )
+    //    .catch(next);
+    //})
     .get('/types', (req, res, next) => {
         posts.getTypes().then(x=> res.send( x ) )
         .catch(next);
@@ -69,4 +63,5 @@ router
             res.send( msg );
         }).catch(next)
     })
+
 module.exports = router;

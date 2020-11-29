@@ -1,54 +1,61 @@
 const express = require('express');
-const workouts = require('../models/workouts');
-
+const exercises = require('../models/exercises');
+const users = require('../models/users');
 const router = express.Router();
 
 router
-    .get('/', (req,res,next) => {
-        workouts.getAll().then(x=> res.send(x)).catch(next);
+    .get('/users/:id/workouts', (req, res, next) => {
+        const userId = +req.params.id;
+        if (!userId) {
+            return next();
+        }
+        users.doesUserExist(userId).then(result => {
+            if (result) {
+                exercises.getWorkouts(userId)
+                    .then(result => res.send(result))
+                    .catch(next);
+            } else {
+                res.send({ status: 404, message: "Sorry, there is no such user" });
+            }
+        }).catch(next);
     })
-
-    .get('/:id', (req,res,next)=>{
-        const id = +req.params.id;
-        if(!id) return next();
-        workouts.get(id).then(x=>res.send(x)).catch(next);
+    .get('/users/:id/workouts/:dayId', (req, res, next) => {
+        const userId = +req.params.id;
+        if (!userId) {
+            return next();
+        }
+        const dayId = +req.params.dayId;
+        if (!dayId) {
+            return next();
+        }
+        users.doesUserExist(userId).then(result => {
+            if (result) {
+                exercises.getWorkoutsForDay(userId, dayId)
+                    .then(result => res.send(result))
+                    .catch(next);
+            } else {
+                res.send({ status: 404, message: "Sorry, there is no such user" });
+            }
+        }).catch(next);
     })
-
-    .get('/types', (req,res,next) =>{
-        workouts.getTypes().then(x=> res.send(x)).catch(next);
-    })
-
-    .get('/search', (req,res,next)=>{
-        workouts.search(req.query.q).then(x=>res.send(x)).catch(next);
-    })
-
-    .post('/', (req,res,next)=>{
-        workouts.add(
-            req.body.Exercise_Type, 
-            req.body.Privacy_Setting , 
-            req.body.Owner_id, 
-            )
-        .then(newUser=>{
-            res.send(newUser);
+    .get('/users/:id/workouts/:dayId/exercises', (req, res, next) => {
+        const userId = +req.params.id;
+        if (!userId) {
+            return next();
+        }
+        const dayId = +req.params.dayId;
+        if (!dayId) {
+            return next();
+        }
+        users.doesUserExist(userId).then(result => {
+            if (result) {
+                exercises.getExercisesForWorkouts(userId, dayId)
+                    .then(result => res.send(result))
+                    .catch(next);
+            } else {
+                res.send({ status: 404, message: "Sorry, there is no such user" });
+            }
         }).catch(next);
     })
 
-    .put('/:id', (req,res,next)=>{
-        workouts.update(
-            req.params.id,
-            req.body.Exercise_Type, 
-            req.body.Privacy_Setting , 
-            req.body.Owner_id, 
-            )
-        .then(newUser=>{
-            res.send(newUser);
-        }).catch(next);
-    })
-
-    .delete('/:id', (req, res, next) => {
-        workouts.remove(req.params.id).then(msg => {
-            res.send( msg );
-        }).catch(next);
-    })
-
-module.exports = router;
+    module.exports = router;

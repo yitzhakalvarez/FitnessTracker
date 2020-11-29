@@ -1,43 +1,39 @@
 const db = require('../db/database');
+const users = require('../models/users')
 
-const Privacy_Levels = { HIDDEN: 0, ONLY_ME: 1, ONLY_FRIENDS: 2, PUBLIC: 4 };
+//the people that are following you
+async function getWorkouts(userId) {
 
-async function getAll(){
-    console.log("called get all");
-
-    return await mysql.query('SELECT * FROM FitnesTracker_Workouts');
+    const workouts = await db.query(`SELECT target_muscle_group, day_id FROM Workout WHERE owner_id=?`, [userId]);
+    //db.query(`SELECT day_id, target_muscle_group, exercise_description, muscle_group_id, owner_id FROM Workout W Join Exercises Ex ON W.id=Ex.muscle_group_id WHERE W.owner_id=?`, [userId]);
+    if (!workouts.length) {
+        return { status: 404, message: "Sorry, you have no workouts scheduled for this day" };
+    }
+    return workouts;
 }
 
-async function get(){
-    const sql = `SELECT * FROM FitnesTracker_Workouts WHERE id=?`;
-    const rows = await mysql.query(sql, [id]);
-
-    if(!rows.length) 
-    throw {status: 404, message: "WORKOUT DOES NOT EXIST"};
-
-    return rows[0];
+//only returns the workouts that have exercises linked to them
+async function getWorkoutsForDay(userId, dayId) {
+    if (!users.getById(userId)) {
+        return { status: 404, message: "Sorry, this user does not exist" };
+    }
+    const workouts = await db.query(`SELECT target_muscle_group, exercise_description FROM Workout W Join Exercises Ex ON W.id=Ex.muscle_group_id WHERE W.owner_id=? AND W.day_id=?`, [userId, dayId]);
+    if (!workouts.length) {
+        return { status: 404, message: "Sorry, you have no workouts scheduled for this day" };
+    }
+    return workouts;
 }
 
-async function getTypes(){
-    return await mysql.query('SELECT id, Name FROM FitnesTracker_Types WHERE Type_id = 3');
+//the people you are following
+async function getExercisesForWorkouts(workoutId) {
+    if (!users.getById(userId)) {
+        return { status: 404, message: "Sorry, this user does not exist" };
+    }
+    const results = await db.query(`SELECT exercise_description FROM Exercises WHERE muscle_group_id=?`, [workoutId]);
+    if (!results.length) {
+        return { status: 404, message: "Sorry, you have not added any exercises to this workout" };
+    }
+    return results;
 }
 
-async function add(Exercise_Type, Privacy_Setting, Owner_id){
-    const sql = `INSERT INTO FitnessTracker_Workouts (created_at, Workout_Type, Privacy_Setting, Owner_id) VALUES ? ;`;
-    const params = [[new Date(), Exercise_Type, Privacy_Setting, Owner_id]];
-    const res = await mysql.query(sql, [params]);
-    return get(res.insertId);
-}
-
-async function update(id, Exercise_Type, Privacy_Setting, Owner_id){
-    const sql = 'UPDATE `Workouts` SET ? WHERE `id` = ?;';
-    const params = { created_at: new Date(), Exercise_Type, Privacy_Setting, Owner_id};
-    return await mysql.query(sql, [params, id]);
-}
-
-async function remove(id){
-    const sql = `DELETE FROM FitnessTracker_Workouts WHERE id = ?`;
-    return await mysql.query(sql, [id]);
-}
-
-module.exports = {getAll, get, getTypes, add, update, remove, Privacy_Levels}
+module.exports = { getWorkoutsForDay, getExercisesForWorkouts, getWorkouts }
