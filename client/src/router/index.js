@@ -1,12 +1,16 @@
 /* eslint-disable */
 import Vue from "vue";
 import VueRouter from "vue-router";
+
+//Routes
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Schedule from "../views/Schedule.vue";
 import Profile from "../views/Profile.vue";
+import MealPlans from "../views/MealPlans.vue";
+import DailyTracking from "../views/DailyTracking.vue";
 import { context } from "../models/context";
 
 Vue.use(VueRouter);
@@ -48,6 +52,18 @@ const routes = [
     component: Profile,
     meta: { requiresAdmin: false, requiresLogin: false }
   },
+  {
+    path: '/dailytracking',
+    name: 'DailyTracking',
+    component: DailyTracking,
+    meta: { requiresAdmin: false, requiresLogin: false }
+},
+{
+    path: '/mealplans',
+    name: 'MealPlans',
+    component: MealPlans,
+    meta: { requiresAdmin: false, requiresLogin: false }
+},
   {
     path: "/about",
     name: "About",
