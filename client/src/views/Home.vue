@@ -12,7 +12,7 @@
           <div class="control">
             <router-link
               to="/register"
-              class="btn button is-primary is-medium is-rounded"
+              class="button is-primary is-medium is-rounded"
               >Register</router-link
             >
           </div>

@@ -179,14 +179,14 @@
         </div>
       </div>
 
-      <button class="btn btn-success submitBtn" type="submit">
+      <button class="btn-success submitBtn" type="submit">
         Save Changes
       </button>
     </form>
   </div>
 </template>
 
-<style scoped lang="scss">
+<style>
 /* Header */
 .Profile .headerContainer {
   width: 100%;
@@ -195,7 +195,7 @@
 .Profile .headerContainer .header {
   display: inline-block;
   padding: 20px;
-  color: silver;
+  color: rgb(17, 16, 16);
   font-family: "Quicksand", sans-serif;
   text-transform: uppercase;
   font-size: 50px;
@@ -203,7 +203,7 @@
 .Profile .headerContainer .header .line {
   width: 100%;
   margin: 0px auto 40px auto;
-  border-bottom: 3px silver solid;
+  border-bottom: 3px rgb(139, 127, 127) solid;
 }
 
 /* Profile Container */

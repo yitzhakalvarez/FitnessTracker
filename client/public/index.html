@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!-- Google Sign In -->
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="fitnesstracker-296818.apps.googleusercontent.com">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>Exercise App</title>
@@ -16,12 +16,36 @@
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
+    <div id="fb-root"></div>
+</div>
+
+
     <!-- built files will be auto injected -->
     </body>
     <footer>
       <p style="text-align: center; color: black">&copy; 2020 Yitzhak Alvarez</p>
     </footer>
 
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
-</html>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0" nonce="QN1Oo9f1"></script>  
+    <script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 40,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+  </script>
+  </html>
