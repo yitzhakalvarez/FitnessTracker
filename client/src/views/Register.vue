@@ -179,6 +179,10 @@ export default {
   background-color: #dd4b39;
   color: white;
 }
+.login {
+  background-color: #24d85a;
+  color: white;
+}
 
 .twitter {
   background-color: #55acee;

@@ -30,12 +30,6 @@
       <div class="navbar-start">
         <router-link to="/" class="navbar-item">Home</router-link>
         <router-link to="/about" class="navbar-item">About</router-link>
-        <router-link to="/mealplans" class="navbar-item"
-          >Meal Plans</router-link
-        >
-        <router-link to="/dailytracking" class="navbar-item"
-          >Daily Tracking</router-link
-        >
         <router-link to="/schedule" class="navbar-item">Schedule</router-link>
         <router-link to="/profile" class="navbar-item">Profile</router-link>
         <router-link
