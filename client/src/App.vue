@@ -15,8 +15,7 @@ export default {
   components:{
      Nav,                      //auto puts Nav object in Nav with name Nav
      Notifications
-  }
-
+  },
 }
 </script>
 

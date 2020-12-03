@@ -22,6 +22,7 @@
         <router-link to="/tracker" class="navbar-item">Tracker</router-link>
         <router-link to="/feed" class="navbar-item">Feed</router-link>
         <router-link to="/calendar" class="navbar-item">Calendar</router-link>
+        <router-link to="/timer" class="navbar-item">Timer</router-link>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">Friends</a>
 
