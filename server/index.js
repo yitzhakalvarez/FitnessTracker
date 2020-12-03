@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 require('dotenv').config();
 
-console.log('At least some code is running');
+console.log('CODE RUNNING');
 
 const users = require('./controllers/users');
 const exercises = require('./controllers/exercises');
@@ -20,11 +20,9 @@ console.log(process.env.BEST_CLASS);
 //  Middleware
 app.use(express.json());
 app.use(express.static( __dirname + '/../docs/'))
-app.use('/public', express.static( __dirname + '/public/')) //dunno what i'mma do with this
- //creates a middleware function that will serve files straight off computer and tells computer where to look.
-//it was looking for a file in the wrong folder. The dirname is the directory name
+app.use('/public', express.static( __dirname + '/public/'))
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });

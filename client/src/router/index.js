@@ -12,19 +12,23 @@ const routes = [
       { path: '/login', name: 'Login', component: Login},
       { path: '/users', name: 'Users', 
         component: () => import(/* webpackChunkName: "Users" */ '../views/Users.vue'),
+        beforeEnter: checkSessionUser
       },
       { path: '/Register', name: 'Register', component: Register},
       { path: '/friendlist', name: 'Friendlist', 
         component: () => import(/* webpackChunkName: "Friendlist" */ '../views/Friends.vue'),
+        beforeEnter: checkSessionUser
     },
       { path: '/adminusers', 
         name: 'AdminUsers', 
         component: () => import(/* webpackChunkName: "AdminUsers" */ '../views/Admin.vue'),
+        beforeEnter: checkSessionUser
       },
       { 
         path: '/fitnesstracker', 
         name: 'FitnessTracker', 
         component: () => import(/* webpackChunkName: "FitnessTracker" */ '../views/Tracker.vue'),
+        beforeEnter: checkSessionUser
       },
       {
         path: '/about',
