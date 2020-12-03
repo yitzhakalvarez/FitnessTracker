@@ -33,7 +33,7 @@
 
         <form id="register-form">
           <div class="field">
-            <label class="label" for="username">Username</label>
+            <label class="label" for="username">Username:</label>
             <div class="control has-icons-left">
               <input
                 class="input"
@@ -43,7 +43,7 @@
                 v-model="username"
               /><span class="icon is-left"><i class="fa">user</i></span>
             </div>
-            <label class="label" for="email">Email</label>
+            <label class="label" for="email">E-Mail:</label>
             <div class="control has-icons-left">
               <input
                 class="input"
@@ -57,33 +57,33 @@
             </div>
             <div class="columns row-one">
               <div class="column">
-                <label class="label" for="firstName">First Name</label>
+                <label class="label" for="firstName">First Name:</label>
                 <div class="control">
                   <input
                     class="input"
                     type="text"
                     placeholder="First Name"
                     name="firstName"
-                    v-model="first_name"
+                    v-model="firstname"
                   />
                 </div>
               </div>
               <div class="column">
-                <label class="label" for="lastName">Last Name</label>
+                <label class="label" for="lastName">Last Name:</label>
                 <div class="control">
                   <input
                     class="input"
                     type="text"
                     placeholder="Last Name"
                     name="lastName"
-                    v-model="last_name"
+                    v-model="lastname"
                   />
                 </div>
               </div>
             </div>
             <div class="columns">
               <div class="column">
-                <label class="label" for="password">Password</label>
+                <label class="label" for="password">Password:</label>
                 <div class="control has-icons-left">
                   <input
                     class="input"
@@ -92,20 +92,6 @@
                     name="password"
                     v-model="password"
                   /><span class="icon is-left"><i class="fa">key</i></span>
-                </div>
-              </div>
-              <div class="column">
-                <label class="label" for="retypePassword"
-                  >Re-Type Password</label
-                >
-                <div class="control has-icons-left">
-                  <input
-                    class="input"
-                    type="password"
-                    placeholder="Confirm Password"
-                    name="retypePassword"
-                    v-model="cpassword"
-                  /><span class="icon is-left"><i class="fa">lock</i></span>
                 </div>
               </div>
             </div>
@@ -134,34 +120,25 @@
 </template>
 
 <script>
+import session from "@/models/session";
+import { register } from "@/models/users";
 export default {
-  name: "Register",
-  components: {},
-  data() {
-    return {
-      form: {
-        username: "",
-        email: "",
-        first_name: "",
-        last_name: "",
-        password: "",
-        cpassword: ""
-      },
-      showError: false
-    };
-  },
-  methods: {
-    async submit() {
-      try {
-        await this.Register(this.form);
-        this.$router.push("/schedule");
-        this.showError = false;
-      } catch (error) {
-        this.showError = true;
-      }
+     data:() => ({
+        email: '', 
+        password: '',
+        username: '',
+        firstname: '',
+        lastname: '',
+    }),
+    methods: {
+       async signup(){
+          const dob = this.year + '-' + this.month + '-' + this.day;
+          await register(this.username, this.firstname, this.lastname, dob, this.password, this.email);
+          session.addNotification('Registered Success');
+          this.$router.push('Login');
+       },
     }
-  }
-};
+}
 </script>
 
 <style>

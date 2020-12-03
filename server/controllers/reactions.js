@@ -1,3 +1,7 @@
+/* B"H
+
+*/
+
 const express = require('express');
 const reactions = require('../models/reactions');
 
@@ -21,7 +25,7 @@ router
     .post('/', (req, res, next) => {
         reactions.add(
             req.body.Text, 
-            req.body.Post_id, 
+            req.body.Exercise_id, 
             req.body.Owner_id, 
         ).then(newUser => {
             res.send( newUser );
@@ -30,7 +34,7 @@ router
    .put('/:id', (req, res, next) => {
         reactions.update( req.params.id,
             req.body.Text, 
-            req.body.Post_id, 
+            req.body.Exercise_id, 
             req.body.Owner_id, 
         ).then(newUser => {
             res.send( newUser );

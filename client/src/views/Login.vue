@@ -1,4 +1,3 @@
-/* eslint-disable */
 <template>
   <form>
     <div class="hero-body">
@@ -31,14 +30,14 @@
               <p>Or sign in manually:</p>
             </div>
             <div class="field">
-              <label for="" class="label">Username</label>
+              <label for="" class="label">E-Mail:</label>
               <div class="control has-icons-left">
                 <input
-                  type="username"
-                  id="Username"
-                  placeholder="username"
+                  type="email"
+                  id="email"
+                  placeholder="john.doe@gmail.com"
                   class="input"
-                  v-model="username"
+                  v-model="email"
                   required
                 />
                 <span class="icon is-small is-left">
@@ -47,7 +46,7 @@
               </div>
             </div>
             <div class="field">
-              <label for="" class="label">Password</label>
+              <label for="" class="label">Password:</label>
               <div class="control has-icons-left">
                 <input
                   type="password"
@@ -87,31 +86,36 @@
 </template>
 
 <script>
-import { context } from "../models/context";
+import session from "@/models/session";
+import { login  } from "@/models/users";
+
 export default {
-  data() {
-    return {
-      username: "",
-      password: ""
-    };
-  },
-  methods: {
-    login() {
-      if (context.login(this.username, this.password)) {
-        this.$buefy.toast.open({
-          message: "Successfully logged in",
-          type: "is-success"
-        });
-        this.$router.push("schedule");
-      } else {
-        this.$buefy.toast.open({
-          message: "Login failed",
-          type: "is-danger"
-        });
-      }
-    }
-  }
-};
+    data:() => ({
+        email: '', 
+        password: '',
+    }),
+    methods: {
+            async Login(){
+            const rows = await login(this.email, this.password)
+            if(!rows)
+              {
+                  session.addNotification('You have entered the wrong email or password')
+              }
+            else
+             {
+                session.user = { //user is an object
+                    name: rows[0].Firstname + ' ' + rows[0].Lastname,
+                    handle: rows[0].Value,
+                }
+                session.user_id = rows[0].User_id
+                session.usertype = rows[0].User_Type
+                session.username = rows[0].Username
+                session.addNotification('Yay! You logged in', 'success')
+                this.$router.push('FitnessTracker')
+             }
+           },
+}
+}
 </script>
 
 <style>

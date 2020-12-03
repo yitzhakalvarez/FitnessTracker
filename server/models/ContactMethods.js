@@ -1,20 +1,48 @@
-const db = require('../db/database');
-const PREFIX = process.env.MYSQL_TABLE_PREFIX || 'FitnessTracker_';
+/* B"H
+
+*/
+const mysql = require('./mysql');
+//const PREFIX = process.env.MYSQL_TABLE_PREFIX || 'Fall2020_';
 const Types = { EMAIL: 'Email', CELL_PHONE:'Cell Phone' };
 
-const isEmailedUsed = async (email) => {
-    const statement = `SELECT * FROM ContactMethods WHERE email=?`;
-    const rows = await db.query(statement, [email]);
-    return rows.length ? true : false;
-};
-
-const add = async (userId, email) => {
-    const now = new Date();
-    const sql = `INSERT INTO ContactMethods (email, created_at, updated_at, user_id) VALUES ?;`;
-    const params = [[email, now, now, userId]];
-    return await db.query(sql, [params]);
+async function getAll(){
+    console.log("Called Get All")
+    return await mysql.query(`SELECT * FROM ContactMethods`);
 }
 
-const remove = async (userId) => await db.query(`DELETE FROM ContactMethods WHERE user_id=?`, [userId]);
+async function get(id){
+    const rows = await mysql.query(`SELECT * FROM ContactMethods WHERE id=?`, [id]);
+    if(!rows.length) throw { status: 404, message: "Sorry, there is no such user" };
+    return rows[0];
+}
 
-module.exports = {isEmailedUsed, add, remove};
+async function exists(email){
+    const rows = await mysql.query(`SELECT * FROM ContactMethods WHERE Value=?`, [email]);
+    console.log ( { rows })
+    return rows.length;
+}
+
+async function getTypes(){
+    return await mysql.query(`SELECT id, Name FROM Types WHERE Type_id = 4`);
+}
+
+async function add(Type, Value, IsPrimary = 0, CanSpam = 1, User_id){
+    const sql = `INSERT INTO ContactMethods (created_at, Type, Value, IsPrimary, CanSpam, User_id) VALUES ? ;`;
+    const params = [[new Date(), Type, Value, IsPrimary, CanSpam, User_id]];
+    return await mysql.query(sql, [params]);
+}
+
+async function update(id, Type, Value, IsPrimary, CanSpam, User_id){
+    const sql = `UPDATE ContactMethods SET ? WHERE id = ?;`;
+    const params = { Type, Value, IsPrimary, CanSpam, User_id };
+    return await mysql.query(sql, [params, id]);
+}
+
+async function remove(id){
+    const sql = `DELETE FROM ContactMethods WHERE id = ?`;
+    return await mysql.query(sql, [id]);
+}
+
+const search = async q => await mysql.query(`SELECT id, Value FROM ContactMethods WHERE Value LIKE ?; `, [`%${q}%`]);
+
+module.exports = { getAll, get, exists, add, update, remove, getTypes, search, Types }
