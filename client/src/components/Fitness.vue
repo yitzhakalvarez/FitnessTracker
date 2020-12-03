@@ -26,7 +26,7 @@
                <h1><strong>Please Select An Excercise:</strong></h1>
               <div class = "dropdown is-active">
                   <select v-model ="exercise_Type_id">
-                      <option v-for="option in options" v-bind:value="option.value">
+                      <option v-for="option in options" v-bind:key="option.value">
                           {{ option.text }}
                       </option>
                   </select>
@@ -142,7 +142,7 @@
                         <h1><strong>Please Select An Excercise:</strong></h1>
                         <div class = "dropdown is-active">
                             <select v-model ="update_exercise_type_id">
-                                <option v-for="option in update_options" v-bind:value="option.value">
+                                <option v-for="option in update_options" v-bind:key="option.value">
                                     {{ option.text }}
                                 </option>
                             </select>

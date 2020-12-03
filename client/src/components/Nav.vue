@@ -19,8 +19,8 @@
     <div class="navbar-start">
         <router-link to="/" class="navbar-item">Home</router-link>
         <router-link to="/about" class="navbar-item">About</router-link>
-        <router-link to="/fitnesstracker" class="navbar-item">Tracker</router-link>
-        <router-link to="/fitnessfeed" class="navbar-item">Feed</router-link>
+        <router-link to="/tracker" class="navbar-item">Tracker</router-link>
+        <router-link to="/feed" class="navbar-item">Feed</router-link>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">Friends</a>
 
@@ -29,7 +29,7 @@
               <router-link to="/users" class="navbar-item">Add Friends</router-link>
             </a>
             <a class = "navbar-item">
-                <router-link to="/friendlist" class="navbar-item"><strong>Friends</strong></router-link>
+                <router-link to="/friends" class="navbar-item"><strong>Friends</strong></router-link>
             </a>
           </div>
         </div>
@@ -40,7 +40,7 @@
 
             <div class="navbar-dropdown">
               <a class="navbar-item">
-                <router-link to="/adminusers" class="navbar-item">Users</router-link>
+                <router-link to="/admin" class="navbar-item">Users</router-link>
               </a>
             </div>
        </div>

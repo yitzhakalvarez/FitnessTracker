@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import FitnessPosts from "@/components/FitnessPosts";
+import Posts from "@/components/Posts";
 import { getFitnessPosts } from "@/models/exercise";
 import session from "@/models/session";
 
@@ -31,7 +31,7 @@ export default {
         this.posts = await getFitnessPosts(user_id);
     },
     components: {
-       FitnessPosts
+       Posts
     },
     methods: {
         error(){

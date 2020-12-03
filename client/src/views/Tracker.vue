@@ -13,7 +13,7 @@
 
 <script>
 import session from "@/models/session";
-import FitnessStuff from "@/components/FitnessStuff";
+import Fitness from "@/components/Fitness";
 import { getExercises } from "@/models/exercise";
 
 export default {
@@ -27,7 +27,7 @@ export default {
         this.exercises = await getExercises();
     },
     components: {
-        FitnessStuff
+        Fitness
     },
 }
 </script>

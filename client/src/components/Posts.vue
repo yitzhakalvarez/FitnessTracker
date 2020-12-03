@@ -12,7 +12,7 @@
   </header>
 
   <div class="card-content">
-    <h3 style="font-size:45px;"><strong>A New Exercise Has Been Posted</strong></h3>
+    <h3 style="font-size:45px;">New Exercise Alert!</h3>
     <div class="media">
       <div class="media-content">
         <p class="title is-4"><br>{{post.FirstName}} {{post.LastName}}</p>

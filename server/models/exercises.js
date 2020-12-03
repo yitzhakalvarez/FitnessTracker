@@ -1,5 +1,5 @@
 /* B"H
-    Need to Fix
+    Need to Fix - this crashes my heroku app | idk why so it's not in server/index.js
 */
 const e = require('express');
 const getexercisetype = require('./exercisetypes');
