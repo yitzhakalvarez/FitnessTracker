@@ -6,6 +6,8 @@ const users = require('./controllers/users');
 const comments = require('./controllers/comments');
 const reactions = require('./controllers/reactions');
 const exercisetypes = require('./controllers/exercisetypes');
+const friendlist = require('./controllers/Friendlist');
+
 
 const app = express()
 const port = process.env.PORT || 3000;
@@ -42,6 +44,8 @@ app.use('/users', users);
 app.use('/comments', comments);
 app.use('/reactions', reactions);
 app.use('/exercisetypes', exercisetypes);
+app.use('/friendlist', friendlist);
+
 
 app.get('*', (req, res, next) => {
     const filename = path.join(__dirname, '/../docs/index.html');
