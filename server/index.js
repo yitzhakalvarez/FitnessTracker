@@ -7,6 +7,7 @@ const comments = require('./controllers/comments');
 const reactions = require('./controllers/reactions');
 const exercisetypes = require('./controllers/exercisetypes');
 const friendlist = require('./controllers/Friendlist');
+const exercises = require('./controllers/exercises');
 
 
 const app = express()
@@ -45,6 +46,7 @@ app.use('/comments', comments);
 app.use('/reactions', reactions);
 app.use('/exercisetypes', exercisetypes);
 app.use('/friendlist', friendlist);
+app.use('/exercises', exercises);
 
 
 app.get('*', (req, res, next) => {
