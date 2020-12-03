@@ -293,5 +293,40 @@ COMMIT;
 START TRANSACTION;
 INSERT INTO `Emojis` (`id`, `created_at`, `update_at`, `Name`, `Description`, `Code`, `Type_id`) VALUES (DEFAULT, 'Now()', '', 'red_heart', 'red heart - U+2764', '❤️', 420);
 
+--
+-- Table structure for table `names_exercises`
+--
+
+CREATE TABLE `names_exercises` (
+  `id` int(11) NOT NULL,
+  `major_name` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `minor_name` varchar(100) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `names_exercises`
+--
+
+INSERT INTO `names_exercises` (`id`, `major_name`, `minor_name`) VALUES
+(1, 'Abdominal Brace', 'Alternate Leg Extensions'),
+(2, 'Abdominal Brace', 'Alternate Leg Extensions - Arms Overhead'),
+(3, 'Abdominal Brace', 'Alternate Straight Leg Raises'),
+(4, 'Abdominal Brace', 'Ars Overhead - Lying'),
+(5, 'Abdominal Brace', 'Back Dish'),
+(6, 'Abdominal Brace', 'Double Leg Extensions'),
+(7, 'Abdominal Brace', 'Double Leg Lowers'),
+(8, 'Abdominal Brace', 'Flutter Kick - Arms Overhead'),
+(9, 'Abdominal Brace', 'Foot Slides'),
+(10, 'Abdominal Brace', 'Large Leg Circles');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `names_exercises`
+--
+ALTER TABLE `names_exercises`
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
