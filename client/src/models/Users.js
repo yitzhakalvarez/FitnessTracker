@@ -1,44 +1,65 @@
-/* B"H
+import { skeletonSchedule, exampleRoutine } from "./DailyRoutines.js";
 
-*/
-import { myFetch } from "./my-fetch";
-import session from "./session"
+export const users = [
+  {
+    id: 1,
+    email: "test1@gmail.com",
+    name: "Yitzhak Alvarez",
+    handle: "alvarezy3",
+    password: "newpaltz",
+    admin: true,
+    loggedIn: false,
+    friends: [],
+    routine: exampleRoutine
+  },
+  {
+    id: 2,
+    email: "test2@gmail.com",
+    name: "Zach Silver",
+    handle: "zachs1",
+    password: "test",
+    admin: false,
+    loggedIn: false,
+    friends: [],
+    routine: skeletonSchedule
+  },
+  {
+    id: 3,
+    email: "test3@gmail.com",
+    name: "Brad Thomas",
+    handle: "thomas1",
+    password: "test",
+    admin: false,
+    loggedIn: false,
+    friends: [],
+    routine: skeletonSchedule
+  },
+  {
+    id: 4,
+    email: "test4@gmail.com",
+    name: "Moshe Plotkin",
+    handle: "moshe1",
+    password: "test",
+    admin: false,
+    loggedIn: false,
+    friends: [],
+    routine: skeletonSchedule
+  },
+  {
+    id: 5,
+    email: "test5@gmail.com",
+    name: "Kenan Huckleberry",
+    handle: "kenaberry",
+    password: "test",
+    admin: false,
+    loggedIn: false,
+    friends: [],
+    routine: skeletonSchedule
+  }
+];
+
+import { myFetch } from "./myfetch";
 
 export function getList() {
-    return myFetch('users');
+  return myFetch("users");
 }
-
-export function getListAdmin() {
-    return myFetch('users/usertableforadmin');
-}
-
-export function login(email, password){
-   return myFetch('users/login', {email, password })
-}
-
-export function register(username, firstname, lastname, dob, password, email){
-    return myFetch('users/register', {UserName: username, FirstName: firstname, LastName: lastname, DOB: dob, Password: password, Email: email})
-}
-
-export function getUserFriendslist(id){
-    return myFetch('friendlist/friendslist', {Owner_id: id})
-}
-
-export function deleteuserfromlist(id){
-    return myFetch('users/delete', {id: id})
-}
-
-export function addfriend(friend_id, id){
-    return myFetch('friendlist/add_Friend', {Friends_id: friend_id, Owner_id: id})
-}
-
-export function deletefriend(friend_id, id){
-    return myFetch('friendlist/delete_Friend', {Friends_id: friend_id, Owner_id: id})
-}
-
-/*
-export const User_Server_Side = {
-
-}
-
-*/

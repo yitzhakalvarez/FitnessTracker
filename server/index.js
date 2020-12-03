@@ -3,10 +3,8 @@ const path = require('path');
 require('dotenv').config();
 
 const users = require('./controllers/users');
-const exercises = require('./controllers/exercises');
+const posts = require('./controllers/posts');
 const comments = require('./controllers/comments');
-const exercisetypes = require('./controllers/exercisetypes');
-const friendlist = require('./controllers/Friendlist');
 const reactions = require('./controllers/reactions');
 
 const app = express()
@@ -41,10 +39,8 @@ app.get('/hello', (req, res, next) => {
 })
 
 app.use('/users', users);
+app.use('/posts', posts);
 app.use('/comments', comments);
-app.use('/exercises', exercises);
-app.use('/exercisetypes', exercisetypes);
-app.use('/friendlist', friendlist);
 app.use('/reactions', reactions);
 
 app.get('*', (req, res, next) => {

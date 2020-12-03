@@ -1,5 +1,6 @@
+/* eslint-disable */
 <template>
-  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
         <img src="../assets/weight.png" />
@@ -29,61 +30,62 @@
       <div class="navbar-start">
         <router-link to="/" class="navbar-item">Home</router-link>
         <router-link to="/about" class="navbar-item">About</router-link>
-        <router-link to="/tracker" class="navbar-item">Fitness</router-link>
+        <router-link to="/schedule" class="navbar-item">Schedule</router-link>
+        <router-link to="/profile" class="navbar-item">Profile</router-link>
+        <router-link
+          to="/dashboard"
+          v-if="ctx.user !== null && ctx.user.admin"
+          class="navbar-item"
+          >Dashboard</router-link
+        >
+      </div>
 
-       <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">Friends</a>
-
-          <div class="navbar-dropdown">
-            <a class = "navbar-item">
-              <router-link to="/users" class="navbar-item">Add Friends</router-link>
-            </a>
-            <a class = "navbar-item">
-                <router-link to="/friends" class="navbar-item"><strong>View Friends</strong></router-link>
-            </a>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <router-link
+              v-if="ctx.user === null"
+              to="/register"
+              class="button is-primary is-rounded"
+              >Register</router-link
+            >
+            <router-link
+              v-if="ctx.user === null"
+              to="/login"
+              class="button is-light is-rounded"
+              >Log in</router-link
+            >
+            <button
+              v-if="ctx.user !== null"
+              class="button is-primary"
+              @click="logout"
+            >
+              Log out
+            </button>
           </div>
         </div>
-         <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              Admin
-            </a>
-
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                <router-link to="/admin" class="navbar-item">Users</router-link>
-              </a>
-            </div>
-       </div>
+      </div>
     </div>
-  <div class="navbar-end">
-      <div class="navbar-item">
-         <LoginBadge />
-      </div>
-        </div>
-      </div>
   </nav>
 </template>
 
 <script>
-import LoginBadge from "@/components/LoginBadge";
-import session from "@/models/session";
+import { context } from "../models/context";
 
 export default {
-   data: () => ({
-       isActive: false,
-       session,
-       isAdmin: session.usertype
-   }),
-   methods: {
-
-   },
-   components: {
-      LoginBadge,
-   }
-}
-
+  data() {
+    return {
+      ctx: context.state,
+      isActive: false
+    };
+  },
+  methods: {
+    logout() {
+      context.logout();
+      this.$router.push("/");
+    }
+  }
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

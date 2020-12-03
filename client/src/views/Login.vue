@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <form>
     <div class="hero-body">
@@ -30,14 +31,14 @@
               <p>Or sign in manually:</p>
             </div>
             <div class="field">
-              <label for="" class="label">E-Mail:</label>
+              <label for="" class="label">Username</label>
               <div class="control has-icons-left">
                 <input
-                  type="email"
-                  id="email"
-                  placeholder="john.doe@gmail.com"
+                  type="username"
+                  id="Username"
+                  placeholder="username"
                   class="input"
-                  v-model="email"
+                  v-model="username"
                   required
                 />
                 <span class="icon is-small is-left">
@@ -46,7 +47,7 @@
               </div>
             </div>
             <div class="field">
-              <label for="" class="label">Password:</label>
+              <label for="" class="label">Password</label>
               <div class="control has-icons-left">
                 <input
                   type="password"
@@ -62,7 +63,7 @@
               </div>
             </div>
             <div class="control">
-              <button class="login btn" @click.prevent="login">
+              <button class="login btn" @click="login">
                 Login
               </button>
             </div>
@@ -86,36 +87,31 @@
 </template>
 
 <script>
-import session from "@/models/session";
-import { login  } from "@/models/users";
-
+import { context } from "../models/context";
 export default {
-    data:() => ({
-        email: '', 
-        password: '',
-    }),
-    methods: {
-            async Login(){
-            const rows = await login(this.email, this.password)
-            if(!rows)
-              {
-                  session.addNotification('wrong email or password')
-              }
-            else
-             {
-                session.user = { //user is an object
-                    name: rows[0].Firstname + ' ' + rows[0].Lastname,
-                    handle: rows[0].Value,
-                }
-                session.user_id = rows[0].User_id
-                session.usertype = rows[0].User_Type
-                session.username = rows[0].Username
-                session.addNotification('Successfully Logged In')
-                this.$router.push('FitnessTracker')
-             }
-           },
-}
-}
+  data() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
+  methods: {
+    login() {
+      if (context.login(this.username, this.password)) {
+        this.$buefy.toast.open({
+          message: "Successfully logged in",
+          type: "is-success"
+        });
+        this.$router.push("schedule");
+      } else {
+        this.$buefy.toast.open({
+          message: "Login failed",
+          type: "is-danger"
+        });
+      }
+    }
+  }
+};
 </script>
 
 <style>
@@ -180,7 +176,7 @@ input[type="submit"]:hover {
   width: 50%;
   margin: auto;
   padding: 0 50px;
-  margin-top: 9px;
+  margin-top: 6px;
 }
 
 /* Clear floats after the columns */
@@ -196,7 +192,7 @@ input[type="submit"]:hover {
   left: 50%;
   transform: translate(-50%);
   border: 2px solid #ddd;
-  height: 225px;
+  height: 220px;
 }
 
 /* text inside the vertical line */

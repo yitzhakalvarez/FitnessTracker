@@ -1,25 +1,19 @@
 <template>
-     <div class="">
-          <Nav/>
-         <div class="container">
-              <Notifications /> 
-              <router-view/>
-        </div>
-     </div>
+  <div class="">
+    <Nav />
+    <div class="container">
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <script>
-import Nav from "@/components/Nav"
-import Notifications from "@/components/Notifications";
+import Nav from "@/components/Nav";
 export default {
-  components:{
-     Nav,                      //auto puts Nav object in Nav with name Nav
-     Notifications
+  components: {
+    Nav
   }
-
-}
+};
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

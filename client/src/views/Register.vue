@@ -33,7 +33,7 @@
 
         <form id="register-form">
           <div class="field">
-            <label class="label" for="username">Username:</label>
+            <label class="label" for="username">Username</label>
             <div class="control has-icons-left">
               <input
                 class="input"
@@ -43,7 +43,7 @@
                 v-model="username"
               /><span class="icon is-left"><i class="fa">user</i></span>
             </div>
-            <label class="label" for="email">E-Mail:</label>
+            <label class="label" for="email">Email</label>
             <div class="control has-icons-left">
               <input
                 class="input"
@@ -57,68 +57,33 @@
             </div>
             <div class="columns row-one">
               <div class="column">
-                <label class="label" for="firstName">First Name:</label>
+                <label class="label" for="firstName">First Name</label>
                 <div class="control">
                   <input
                     class="input"
                     type="text"
                     placeholder="First Name"
                     name="firstName"
-                    v-model="firstname"
+                    v-model="first_name"
                   />
                 </div>
               </div>
               <div class="column">
-                <label class="label" for="lastName">Last Name:</label>
+                <label class="label" for="lastName">Last Name</label>
                 <div class="control">
                   <input
                     class="input"
                     type="text"
                     placeholder="Last Name"
                     name="lastName"
-                    v-model="lastname"
+                    v-model="last_name"
                   />
                 </div>
               </div>
             </div>
-            <div class = "columns">
-              <div class = "column is-one-third">
-                <div class="field">
-                  <label class="label" for="year">Year:</label>
-                  <div class="control has-icons-left">
-                    <input class="input" type="number" placeholder="year" v-model="year">
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-user"></i>
-                      </span>
-                      </div>
-                      </div>
-                      </div>
-              <div class = "column is-one-third">
-      <div class="field">
-        <label class="label">Month:</label>
-        <div class="control has-icons-left">
-          <input class="input" type="number" placeholder="month-number" v-model="month">
-          <span class="icon is-small is-left">
-            <i class="fas fa-user"></i>
-          </span>
-        </div>
-      </div>
-  </div>
-  <div class = "column is-one-third">
-      <div class="field">
-        <label class="label">Day:</label>
-        <div class="control has-icons-left">
-          <input class="input" type="number" placeholder="day-number" v-model="day">
-          <span class="icon is-small is-left">
-            <i class="fas fa-user"></i>
-          </span>
-        </div>
-      </div>
-  </div>
-</div>
             <div class="columns">
               <div class="column">
-                <label class="label" for="password">Password:</label>
+                <label class="label" for="password">Password</label>
                 <div class="control has-icons-left">
                   <input
                     class="input"
@@ -131,7 +96,7 @@
               </div>
               <div class="column">
                 <label class="label" for="retypePassword"
-                  >Re-Type Password:</label
+                  >Re-Type Password</label
                 >
                 <div class="control has-icons-left">
                   <input
@@ -169,29 +134,34 @@
 </template>
 
 <script>
-import session from "@/models/session";
-import { register } from "@/models/users";
 export default {
-     data:() => ({
-        email: '', 
-        password: '',
-        cpassword:'',
-        username: '',
-        firstname: '',
-        lastname: '',
-        year: 0,
-        month: 0,
-        day: 0,
-    }),
-    methods: {
-       async signup(){
-          const dob = this.year + '-' + this.month + '-' + this.day;
-          await register(this.username, this.firstname, this.lastname, dob, this.password, this.cpassword, this.email);
-          session.addNotification('Registration Successfully');
-          this.$router.push('Login');
-       },
+  name: "Register",
+  components: {},
+  data() {
+    return {
+      form: {
+        username: "",
+        email: "",
+        first_name: "",
+        last_name: "",
+        password: "",
+        cpassword: ""
+      },
+      showError: false
+    };
+  },
+  methods: {
+    async submit() {
+      try {
+        await this.Register(this.form);
+        this.$router.push("/schedule");
+        this.showError = false;
+      } catch (error) {
+        this.showError = true;
+      }
     }
-}
+  }
+};
 </script>
 
 <style>
