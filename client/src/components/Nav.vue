@@ -23,6 +23,7 @@
         <router-link to="/feed" class="navbar-item">Feed</router-link>
         <router-link to="/calendar" class="navbar-item">Calendar</router-link>
         <router-link to="/timer" class="navbar-item">Timer</router-link>
+        <router-link to="/autoselect" class="navbar-item">Select</router-link>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">Friends</a>
 
