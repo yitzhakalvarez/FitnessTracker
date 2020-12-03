@@ -13,24 +13,20 @@ const routes = [
       { path: '/login', name: 'Login', component: Login},
       { path: '/users', name: 'Users', 
         component: () => import(/* webpackChunkName: "Users" */ '../views/Users.vue'),
-        beforeEnter: checkSessionUser
-      },
+        beforeEnter: checkSessionUser},
       { path: '/register', name: 'Register', component: Register},
       { path: '/friends', name: 'Friends', 
         component: () => import(/* webpackChunkName: "Friends" */ '../views/Friends.vue'),
-        beforeEnter: checkSessionUser
-    },
+        beforeEnter: checkSessionUser},
       { path: '/admin', 
         name: 'Admin', 
         component: () => import(/* webpackChunkName: "Admin" */ '../views/Admin.vue'),
-        beforeEnter: checkSessionUser
-      },
+        beforeEnter: checkSessionUser},
       { 
         path: '/tracker', 
         name: 'Tracker', 
         component: () => import(/* webpackChunkName: "Tracker" */ '../views/Tracker.vue'),
-        beforeEnter: checkSessionUser
-      },
+        beforeEnter: checkSessionUser},
       {
         path: '/about',
         name: 'About',
@@ -53,7 +49,7 @@ function checkSessionUser (to, from, next) {
   if(session.user){
     next();
   }else{
-    next('/login');
+    next('/Login');
   }
 }
 
@@ -61,6 +57,6 @@ function checkSessionUserType (to, from, next) {
   if(session.usertype == 5){
     next();
   }else{
-    next('/users');
+    next('/Users');
   }
 }
