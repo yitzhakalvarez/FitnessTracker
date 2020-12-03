@@ -1,66 +1,40 @@
-/* eslint-disable */
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import session from '../models/session'
+import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 
-//Routes
-import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
-import Register from "../views/Register.vue";
-import Dashboard from "../views/Dashboard.vue";
-import Schedule from "../views/Schedule.vue";
-import Profile from "../views/Profile.vue";
-import { context } from "../models/context";
-
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-    meta: { requiresAdmin: false, requiresLogin: false }
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-    meta: { requiresAdmin: false, requiresLogin: false }
-  },
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
-    meta: { requiresAdmin: true, requiresLogin: true }
-  },
-  {
-    path: "/register",
-    name: "Register",
-    component: Register,
-    meta: { requiresAdmin: false, requiresLogin: false }
-  },
-  {
-    path: "/schedule",
-    name: "Schedule",
-    component: Schedule,
-    meta: { requiresAdmin: false, requiresLogin: true }
-  },
-  {
-    path: "/profile",
-    name: "Profile",
-    component: Profile,
-    meta: { requiresAdmin: false, requiresLogin: false }
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-    meta: { requiresAdmin: false, requiresLogin: false }
-  }
-];
+      { path: '/', name: 'Home', component: Home},
+      { path: '/login', name: 'Login', component: Login},
+      { path: '/users', name: 'Users', 
+        component: () => import(/* webpackChunkName: "Users" */ '../views/Users.vue'),
+      },
+      { path: '/Register', name: 'Register', component: Register},
+      { path: '/friendlist', name: 'Friendlist', 
+        component: () => import(/* webpackChunkName: "Friendlist" */ '../views/Friends.vue'),
+    },
+      { path: '/adminusers', 
+        name: 'AdminUsers', 
+        component: () => import(/* webpackChunkName: "AdminUsers" */ '../views/Admin.vue'),
+      },
+      { 
+        path: '/fitnesstracker', 
+        name: 'FitnessTracker', 
+        component: () => import(/* webpackChunkName: "FitnessTracker" */ '../views/Tracker.vue'),
+      },
+      {
+        path: '/about',
+        name: 'About',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+      },
+]
 
 const router = new VueRouter({
   mode: 'history',
@@ -68,15 +42,20 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  let user = context.state.user;
-  if (user === null && to.meta.requiresLogin) {
-    next('/login')
-  } else if (to.meta.requiresAdmin && !user.admin) {
-    next('/home');
-  } else {
-    next();
-  }
-});
-
 export default router
+
+function checkSessionUser (to, from, next) {
+  if(session.user){
+    next();
+  }else{
+    next('Login');
+  }
+}
+
+function checkSessionUserType (to, from, next) {
+  if(session.usertype == 5){
+    next();
+  }else{
+    next('Users');
+  }
+}
