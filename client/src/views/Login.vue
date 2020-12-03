@@ -62,7 +62,7 @@
               </div>
             </div>
             <div class="control">
-              <button class="login btn" @click="login">
+              <button class="login btn" @click.prevent="login">
                 Login
               </button>
             </div>

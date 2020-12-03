@@ -106,7 +106,7 @@
               <div class="control">
                 <button
                   class="button is-primary is-medium is-rounded"
-                  type="submit"
+                  @click.prevent="signup"
                 >
                   Register
                 </button>
