@@ -3,6 +3,7 @@ const path = require('path');
 require('dotenv').config();
 
 const users = require('./controllers/users');
+const exercises = require('./controllers/exercises');
 const comments = require('./controllers/comments');
 const reactions = require('./controllers/reactions');
 
@@ -38,6 +39,7 @@ app.get('/hello', (req, res, next) => {
 })
 
 app.use('/users', users);
+app.use('/exercises', exercises);
 app.use('/comments', comments);
 app.use('/reactions', reactions);
 
