@@ -6,10 +6,10 @@
                 v-model="name"
                 ref="autocomplete"
                 :data="filteredDataArray"
-                placeholder="e.g. Orange"
+                placeholder="e.g. Running"
                 @select="option => selected = option">
                 <template slot="footer">
-                    <a @click="showAddFruit">
+                    <a @click="showAddExercises">
                         <span> Add new... </span>
                     </a> 
                 </template>
@@ -20,21 +20,19 @@
 </template>
 
 <script>
+ import session from "@/models/session";
+import { getexercisetypesname } from "@/models/exercise";
     export default {
-        data() {
+        data:function() {
             return {
-                data: [
-                    'Orange',
-                    'Apple',
-                    'Banana',
-                    'Pear',
-                    'Lemon',
-                    'Strawberry',
-                    'Kiwi'
-                ],
+                data: [],
                 name: '',
-                selected: null
+                selected: null,
             }
+        },
+        async created()
+        {
+           this.data = await getexercisetypesname();
         },
         computed: {
             filteredDataArray() {
@@ -43,23 +41,6 @@
                         .toString()
                         .toLowerCase()
                         .indexOf(this.name.toLowerCase()) >= 0
-                })
-            }
-        },
-        methods: {
-            showAddFruit() {
-                this.$buefy.dialog.prompt({
-                    message: `Fruit`,
-                    inputAttrs: {
-                        placeholder: 'e.g. Watermelon',
-                        maxlength: 20,
-                        value: this.name
-                    },
-                    confirmText: 'Add',
-                    onConfirm: (value) => {
-                        this.data.push(value)
-                        this.$refs.autocomplete.setSelected(value)
-                    }
                 })
             }
         }
