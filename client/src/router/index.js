@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import session from '../models/session'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
@@ -14,20 +15,20 @@ const routes = [
         component: () => import(/* webpackChunkName: "Users" */ '../views/Users.vue'),
         beforeEnter: checkSessionUser
       },
-      { path: '/Register', name: 'Register', component: Register},
-      { path: '/friendlist', name: 'Friendlist', 
-        component: () => import(/* webpackChunkName: "Friendlist" */ '../views/Friends.vue'),
+      { path: '/register', name: 'Register', component: Register},
+      { path: '/friends', name: 'Friends', 
+        component: () => import(/* webpackChunkName: "Friends" */ '../views/Friends.vue'),
         beforeEnter: checkSessionUser
     },
-      { path: '/adminusers', 
-        name: 'AdminUsers', 
-        component: () => import(/* webpackChunkName: "AdminUsers" */ '../views/Admin.vue'),
+      { path: '/admin', 
+        name: 'Admin', 
+        component: () => import(/* webpackChunkName: "Admin" */ '../views/Admin.vue'),
         beforeEnter: checkSessionUser
       },
       { 
-        path: '/fitnesstracker', 
-        name: 'FitnessTracker', 
-        component: () => import(/* webpackChunkName: "FitnessTracker" */ '../views/Tracker.vue'),
+        path: '/tracker', 
+        name: 'Tracker', 
+        component: () => import(/* webpackChunkName: "Tracker" */ '../views/Tracker.vue'),
         beforeEnter: checkSessionUser
       },
       {
@@ -52,7 +53,7 @@ function checkSessionUser (to, from, next) {
   if(session.user){
     next();
   }else{
-    next('Login');
+    next('/login');
   }
 }
 
@@ -60,6 +61,6 @@ function checkSessionUserType (to, from, next) {
   if(session.usertype == 5){
     next();
   }else{
-    next('Users');
+    next('/users');
   }
 }
