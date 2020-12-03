@@ -3,7 +3,6 @@
 */
 const mysql = require('./mysql');
 
-const PREFIX = process.env.MYSQL_TABLE_PREFIX || 'Fall2020_';
 const Emojis = { LOVE: '❤️' }
 
 async function getAll(){

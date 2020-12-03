@@ -6,15 +6,12 @@ const getexercisetype = require('./exercisetypes');
 const mysql = require('./mysql');
 const cm = require('./ContactMethods');
 const comments = require('./comments');
-//const Types = {RUNNING: 'Running', BENCH_PRESS: 'Bench Press', WALKING: 'Walking', BICYCLE_RIDING: 'Bicycle Riding', SWIMMING: 'Swimming'}; //not going to be used anymore. I think
 
 async function getAll(){
     console.log("Called Get All Exercises")
     const sql = `SELECT * FROM Exercises`;
     const rows = await mysql.query(sql);
     console.log(rows[0].Exercise_Type);
-    //return await mysql.query(`SELECT * FROM Exercises`);
-    //const sql = `SELECT E.*, FirstName, LastName FROM Exercises E Join Users U ON E.User_id = U.id`
     return rows;
 }
 
@@ -77,8 +74,7 @@ async function update(id, Time_Spent, Calories_Burned, Favorite_Exercise, Exerci
     const res = await mysql.query(sql, [params, id, Owner_id]);
     return get(id, Owner_id);
 }
-//const params = { Type, Value, IsPrimary, CanSpam, User_id };
-// return await mysql.query(sql, [params, id]);
+
 
 async function remove(id, Owner_id){
     console.log("Removing Exercises")

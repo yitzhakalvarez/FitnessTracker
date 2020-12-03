@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 const mysql = require('./mysql');
 const cm = require('./ContactMethods');
 
-//const PREFIX = process.env.MYSQL_TABLE_PREFIX || 'Fall2020_';
 const SALT_ROUNDS = process.env.SALT_ROUNDS || 8;
 const Types = { ADMIN:5, USER:6 };
 
