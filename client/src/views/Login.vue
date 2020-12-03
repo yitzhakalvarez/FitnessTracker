@@ -99,11 +99,11 @@ export default {
             const rows = await login(this.email, this.password)
             if(!rows)
               {
-                  session.addNotification('You have entered the wrong email or password')
+                  session.addNotification('wrong email or password')
               }
             else
              {
-                session.user = { //user is an object
+                session.user = {
                     name: rows[0].Firstname + ' ' + rows[0].Lastname,
                     handle: rows[0].Value,
                 }
@@ -111,7 +111,7 @@ export default {
                 session.usertype = rows[0].User_Type
                 session.username = rows[0].Username
                 session.addNotification('Yay! You logged in', 'success')
-                this.$router.push('FitnessTracker')
+                this.$router.push('Tracker')
              }
            },
 }
