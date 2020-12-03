@@ -1,10 +1,8 @@
 <template>
 <div class = "page">
-    <h1 class="is-size-1">
-        Fitness Goals Tracker!
-    </h1> 
+    <strong>Fitness Page</strong>
     <div class = "container">
-        <FitnessStuff/>
+        <Fitness/>
         <router-view/>
     </div>
 </div>

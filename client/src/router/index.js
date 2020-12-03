@@ -21,7 +21,6 @@ const routes = [
       { path: '/users', 
         name: 'Users', 
         component: () => import(/* webpackChunkName: "Users" */ '../views/Users.vue'),
-        beforeEnter: checkSessionUser
       },
       { path: '/register', 
         name: 'Register', 
@@ -29,20 +28,20 @@ const routes = [
       { path: '/friends', 
         name: 'Friends', 
         component: () => import(/* webpackChunkName: "Friendlist" */ '../views/Friends.vue'),
-        beforeEnter: checkSessionUser},
+      },
       { path: '/feed', 
         name: 'Feed', 
         component: () => import(/* webpackChunkName: "Fitnessfeed" */ '../views/Feed.vue'),
-        beforeEnter: checkSessionUser},
+      },
       { path: '/admin', 
         name: 'Admin', 
         component: () => import(/* webpackChunkName: "AdminUsers" */ '../views/Admin.vue'),
-        beforeEnter: checkSessionUserType},
+      },
       { 
         path: '/tracker', 
         name: 'Tracker', 
         component: () => import(/* webpackChunkName: "FitnessTracker" */ '../views/Tracker.vue'),
-        beforeEnter: checkSessionUser,
+      
       },
       {
         path: '/about',

@@ -1,10 +1,9 @@
 <template>
   <div class="page">
-      <h2 class="title is-2"><br>Feed Page(Ran out of time to make comments and reactions dynamically change with the page. It works but you'll have to refresh the page to see the changes.)</h2>
-
+      <strong>Feed</strong>
         <div class="columns">
             <div class="column is-one-half">
-                <FitnessPosts v-for=" (x, i) in posts " 
+                <Posts v-for=" (x, i) in posts" 
                       :key="i"
                       :i="i"
                       :post="x" /> 
@@ -26,9 +25,9 @@ export default {
     },
     async created(){
         const user_id = session.user_id;
-        console.log('Attempting to get feed info');
+        console.log('Getting feed info');
         console.log(user_id);
-        this.posts = await getFitnessPosts(user_id);
+        this.posts = await getPosts(user_id);
     },
     components: {
        Posts
@@ -48,6 +47,6 @@ export default {
 
 <style>
     .card {
-        margin-bottom: 30px ;
+        margin-bottom: 20px ;
     }
 </style>

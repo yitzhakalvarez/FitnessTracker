@@ -1,31 +1,27 @@
 <template>
   <div class="page">
-      <h2 class="title is-2">Users Page</h2>
+      <strong>Users Page</strong>
         <div class = "card">
         <div class = columns>
-           <div class = "column is-two-thirds">
+           <div class = "column is-one-thirds">
                       <div class="control">
-                        <a class="button" @click.prevent="releasefriendforms">
-                             See someone you want to add to your friends list?
+                        <a class="button is-rounded is-info" @click.prevent="releasefriendforms">
+                             Add friend to list
                         </a>
                       </div>
                       <div class = "field" v-if="addfriendid == 1">
-                        <h2><strong>Add a friend with the following inputs!</strong></h2>
-                        <label class="label"> <strong>Enter the id of the user you want to add:</strong></label>
+                        <label class="label"><strong>Enter User's ID:</strong></label>
                         <div class="control">
                           <input class="input" type="Number" placeholder="User ID" v-model="friendid">
                         </div>
                         <div class="control" v-if="addfriendid == 1">
-                         <label class="label"> <strong>After you hit the add friend button hit the view friends button to look at your list of friends:</strong></label>
-                          <a class="button" @click.prevent="addnewfriend">
-                               Add a friend!
+                          <a class="button is-rounded is-success" @click.prevent="addnewfriend">
+                               Click add friend!
                           </a>
                         </div>
                       </div>
-              </div>
-              <div class = "column is-one-third">
-                  <div class="control">
-                      <router-link to="/friendlist"  class="button is-link is-danger"><strong>Look at friendslist</strong></router-link>
+                     <div class="control">
+                      <router-link to="/friends"  class="button is-rounded is-black">Find Friends</router-link>
                   </div>
               </div>
         </div>
@@ -33,11 +29,11 @@
     <div class = "card">
         <table class="table is-narrow is-hoverable is-fullwidth">
             <thead><tr>
-                <th>id</th>
+                <th>I.D.</th>
                 <th>Username</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                 <th>DOB</th>
+                 <th>D.O.B</th>
                 <th>User Type</th>
             </tr></thead>
             <tbody>
