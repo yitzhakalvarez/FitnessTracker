@@ -1,7 +1,7 @@
   
 /* B"H
 */
-const API_ROOT = process.env.API_ROOT || 'http://localhost:3001/';
+const API_ROOT = process.env.API_ROOT || 'http://localhost:3000';
 //if there is no such environment variable then use local host 3001
 export function myFetch(url, data = null, method = null)
 {   if(data){
