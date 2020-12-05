@@ -16,8 +16,6 @@ This repository documents my project done for **CPS493**.
 # Live Website Deployment: 
 <a href="https://fitness-trak.herokuapp.com/"><img align="left" width="90" height="90" src="./client/src/assets/weight.jpg"></a>
 - https://fitness-trak.herokuapp.com/
-- user: alvarezy3
-- password: newpaltz
 
 ## Tech ##
 
