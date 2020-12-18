@@ -14,7 +14,7 @@ This repository documents my project done for **CPS493**.
 - **Class End Date:** December 3, 2020
 
 # Live Website Deployment: 
-<a href="https://fitness-trak.herokuapp.com/"><img align="left" width="100" height="100" src="./client/src/assets/weight.jpg"></a>
+<a href="https://fitness-trak.herokuapp.com/"><img align="left" width="150" height="150" src="./client/src/assets/weight.jpg"></a>
 - https://fitness-trak.herokuapp.com/
 
 # Tech
