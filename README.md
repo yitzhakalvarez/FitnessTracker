@@ -17,7 +17,7 @@ This repository documents my project done for **CPS493**.
 <a href="https://fitness-trak.herokuapp.com/"><img align="left" width="90" height="90" src="./client/src/assets/weight.jpg"></a>
 - https://fitness-trak.herokuapp.com/
 
-## Tech ##
+# Tech
 Application:
 - HTML – Used to structure the web pages.
 -	CSS – Used to style the HTML.
