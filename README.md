@@ -18,7 +18,6 @@ This repository documents my project done for **CPS493**.
 - https://fitness-trak.herokuapp.com/
 
 ## Tech ##
-
 Application:
 - HTML – Used to structure the web pages.
 -	CSS – Used to style the HTML.
