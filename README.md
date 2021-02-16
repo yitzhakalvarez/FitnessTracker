@@ -1,17 +1,16 @@
 ![Image of Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
 
-# Fall 2020 Web Programming: 
+# Fall 2020 Web Programming
 
 This repository documents my project done for **CPS493**.
-- **Personal Information:**
+1. **Personal Information:**
 
-    Name: Yitzhak Alvarez
-
-    Major: *Computer Science*
-    
-    Minor: *Economics*
-- **Class Start Date:** August 24, 2020
-- **Class End Date:** December 3, 2020
+        Name: Yitzhak Alvarez
+        Major: *Computer Science*
+        Minor: *Economics*
+        
+2. **Class Start Date:** August 24, 2020
+3. **Class End Date:** December 3, 2020
 
 # Live Website Deployment: 
 <a href="https://fitness-trak.herokuapp.com/"><img align="left" width="45" height="45" src="./client/src/assets/weight.jpg"></a>
