@@ -21,7 +21,7 @@ This repository documents my project done for **CPS493**.
 - user: alvarezy3
 - password: newpaltz
 
-## Tech
+# Tech
 
 Application:
 
