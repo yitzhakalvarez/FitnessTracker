@@ -1,6 +1,6 @@
-![Image of Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
+# Fall 2020 Web Programming
 
-# Fall 2020 Web Programming:
+![Image of Logo](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
 
 This repository documents my project done for **CPS493**.
 
